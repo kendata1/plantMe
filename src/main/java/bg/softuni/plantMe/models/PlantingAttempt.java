@@ -13,7 +13,7 @@ public class PlantingAttempt extends BaseEntity {
     private Plant plant;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    private UserEntity userEntity;
     @Column(nullable = false)
     private String variety;
     @Column(name = "planting_date", nullable = false)
@@ -29,12 +29,12 @@ public class PlantingAttempt extends BaseEntity {
         this.plant = plant;
     }
 
-    public User getUser() {
-        return user;
+    public UserEntity getUser() {
+        return userEntity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     public String getVariety() {
