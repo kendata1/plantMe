@@ -28,11 +28,11 @@ public class SecurityConfig {
         )
                 .formLogin(formLogin ->
                         formLogin
-                                .loginPage("users/login")
+                                .loginPage("/users/login")
                                 .usernameParameter("username")
                                 .passwordParameter("password")
                                 .defaultSuccessUrl("/home")
-                                .failureForwardUrl("/users/login-error")
+                                .failureForwardUrl("/users/login")
                 )
                 .logout(logout ->
                         logout

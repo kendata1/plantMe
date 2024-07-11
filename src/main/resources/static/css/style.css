@@ -44,8 +44,8 @@ body > nav > div.links > li {
 }
 
 body {
-    background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(84, 91, 98, 0.5), rgba(84, 91, 98, 0.3)), url(static/css/images/background-1.jpg);
-    background-position: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(84, 91, 98, 0.5), rgba(84, 91, 98, 0.3)), url(/images/background-1.jpg);
+    background-position: bottom;
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
@@ -69,8 +69,10 @@ textarea {
     text-align: center;
     margin-right: auto;
     margin-left: auto;
-    box-shadow: 0 4px 16px black;
+    box-shadow: 0 1px 5px black;
+    backdrop-filter: blur(35px);
     z-index: 1;
+
 }
 
 .welcome:hover {
