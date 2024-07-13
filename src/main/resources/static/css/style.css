@@ -74,6 +74,9 @@ textarea {
     z-index: 1;
 
 }
+#homePlantContainer {
+    background-color: rgb(84 91 98 / 10%);
+}
 
 .welcome:hover {
     box-shadow: 0 1px 5px black;

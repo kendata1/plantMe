@@ -7,14 +7,17 @@
 <main>
     <form class="welcome login"
           th:action="@{/add-plant}"
-          th:method="POST">
+          th:method="POST"
+          enctype="multipart/form-data"
+          th:object="${addPlantDTO}">
 
         <div class="form-group">
             <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Plant</span></h1>
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="plantName" class="h3 mb-2">Plant name</label>
+                <label th:for="plantName" class="h3 mb-2">Plant name</label>
             </div>
-            <input  type="text"
+            <input  th:field="*{name}"
+                    type="text"
                     class="form-control"
                     id="plantName"
                     name="plantName"/>
@@ -22,9 +25,9 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="plantFamily" class="h3 mb-2">Plant Family</label>
+                <label th:for="plantFamily" class="h3 mb-2">Plant Family</label>
             </div>
-            <select id="plantFamily" class="form-control">
+            <select id="plantFamily" class="form-control" name="plantFamily">
                 <option value="">- Select plant family -</option>
                 <option th:each="name: ${plantNames}"
                         th:value="${name}"
@@ -36,9 +39,9 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="sunRequirements" class="h3 mb-2">Sun Requirements</label>
+                <label th:for="sunRequirements" class="h3 mb-2">Sun Requirements</label>
             </div>
-            <select id="sunRequirements" class="form-control">
+            <select id="sunRequirements" class="form-control" name="sunRequirements">
                 <option value="">- Select sun requirement -</option>
                 <option th:each="sunReq: ${sunRequirements}"
                         th:value="${sunReq}"
@@ -50,43 +53,43 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="min_spacing" class="h3 mb-2">Min spacing</label>
+                <label th:for="minSpacing" class="h3 mb-2">Min spacing (cm)</label>
             </div>
             <input  type="number"
                     class="form-control"
-                    id="min_spacing"
-                    name="min_spacing"/>
+                    id="minSpacing"
+                    name="minSpacing"/>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="max_spacing" class="h3 mb-2">Max spacing</label>
+                <label th:for="maxSpacing" class="h3 mb-2">Max spacing (cm)</label>
             </div>
             <input  type="number"
                     class="form-control"
-                    id="max_spacing"
-                    name="min_spacing"/>
+                    id="maxSpacing"
+                    name="maxSpacing"/>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="description" class="h3 mb-2">Description</label>
+                <label for="information" class="h3 mb-2">Information</label>
             </div>
             <textarea type="number"
                       class="form-control"
-                      id="description"
-                      name="description"
+                      id="information"
+                      name="information"
                       rows="10"
-                      cols="10">
+                      cols="2">
             </textarea>
         </div>
 
-        <div class="form-group">
+        <div class="form-group mb-3">
             <div class="label-holder text-white d-flex justify-content-center">
                 <label for="image" class="h3 mb-2">Upload image</label>
             </div>
             <input type="file"
-                      class="form-control-file"
+                      class="form-control form-control-sm"
                       id="image"
                       name="image"
                       accept="image/*"
@@ -95,7 +98,7 @@
 
 
         <div class="button-holder d-flex justify-content-center">
-            <button type="submit">Login</button>
+            <button type="submit">Add plant</button>
         </div>
 
     </form>

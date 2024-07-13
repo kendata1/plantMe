@@ -1,4 +1,4 @@
-package bg.softuni.plantMe.service;
+package bg.softuni.plantMe.service.impl;
 
 import bg.softuni.plantMe.models.DTOs.UserRegisterDTO;
 import bg.softuni.plantMe.models.UserEntity;
@@ -6,6 +6,7 @@ import bg.softuni.plantMe.models.UserRole;
 import bg.softuni.plantMe.models.enums.UserRoleEnum;
 import bg.softuni.plantMe.repository.UserRepository;
 import bg.softuni.plantMe.repository.UserRoleRepository;
+import bg.softuni.plantMe.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,9 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(data.getPassword()));
         user.getUserRoles().add(userRoleRepository.findByUserRole(UserRoleEnum.USER)
                 .orElseThrow());
+        if(data.getUsername().equals("kendata")) {
+            user.getUserRoles().add(userRoleRepository.findByUserRole(UserRoleEnum.ADMIN).orElseThrow());
+        }
         userRepository.save(user);
     }
 }

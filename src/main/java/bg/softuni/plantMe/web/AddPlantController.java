@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,15 +20,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Controller
-public class PlantController {
+public class AddPlantController {
 
     private static final String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "\\plantMe\\src\\main\\resources\\static\\images";
     private final PlantService plantService;
 
-    public PlantController(PlantService plantService) {
+    public AddPlantController(PlantService plantService) {
         this.plantService = plantService;
     }
 
+    @ModelAttribute("addPlantDTO")
+    public AddPlantDTO addPlantDTO() {
+        return new AddPlantDTO();
+    }
     @GetMapping("/add-plant")
     public String viewAddPlant (Model model) {
         model.addAttribute("plantNames",plantService.getPlantFamilyNames());
@@ -50,9 +55,8 @@ public class PlantController {
         Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
         Files.write(fileNameAndPath,file.getBytes());
 
+        plantService.addPlant(addPlantDTO, file.getOriginalFilename());
 
-
-
-        return "redirect:/add-plant";
+        return "redirect:/home";
     }
 }

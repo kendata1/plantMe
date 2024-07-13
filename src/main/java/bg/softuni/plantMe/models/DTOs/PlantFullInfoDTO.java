@@ -3,15 +3,25 @@ package bg.softuni.plantMe.models.DTOs;
 import bg.softuni.plantMe.models.PlantFamily;
 import bg.softuni.plantMe.models.enums.SunRequirements;
 
-public class AddPlantDTO {
+public class PlantFullInfoDTO {
+    private Long id;
     private String name;
-    private String plantFamily;
+    private PlantFamily plantFamily;
     private SunRequirements sunRequirements;
     private int minSpacing;
     private int maxSpacing;
     private String information;
+    private String imageUrl;
 
-    public AddPlantDTO () {}
+    public PlantFullInfoDTO () {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -21,11 +31,11 @@ public class AddPlantDTO {
         this.name = name;
     }
 
-    public String getPlantFamily() {
+    public PlantFamily getPlantFamily() {
         return plantFamily;
     }
 
-    public void setPlantFamily(String plantFamily) {
+    public void setPlantFamily(PlantFamily plantFamily) {
         this.plantFamily = plantFamily;
     }
 
@@ -59,5 +69,13 @@ public class AddPlantDTO {
 
     public void setInformation(String information) {
         this.information = information;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

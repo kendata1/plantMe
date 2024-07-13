@@ -15,13 +15,32 @@ public class Plant extends BaseEntity {
     @JoinColumn(name = "plant_family_id", referencedColumnName = "id")
     private PlantFamily plantFamily;
     @Column(name = "sun_requirements", nullable = false)
+    @Enumerated(EnumType.STRING)
     private SunRequirements sunRequirements;
     @Column(name = "min_spacing", nullable = false)
     private int minSpacing;
     @Column(name = "max_spacing", nullable = false)
     private int maxSpacing;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String information;
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Override
+    public String toString() {
+        return "Plant{" +
+                "name='" + name + '\'' +
+                ", plantFamily=" + plantFamily +
+                ", sunRequirements=" + sunRequirements +
+                ", minSpacing=" + minSpacing +
+                ", maxSpacing=" + maxSpacing +
+                ", information='" + information + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", companionPlants=" + companionPlants +
+                ", plantingAttempts=" + plantingAttempts +
+                '}';
+    }
+
     @ManyToMany
     @JoinTable(name = "plants_companions",
     joinColumns = @JoinColumn(name = "plant_id"),
@@ -88,5 +107,13 @@ public class Plant extends BaseEntity {
 
     public void setCompanionPlants(Set<Plant> companionPlants) {
         this.companionPlants = companionPlants;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
