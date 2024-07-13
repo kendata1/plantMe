@@ -1,6 +1,5 @@
 package bg.softuni.plantMe.models;
 
-import bg.softuni.plantMe.BaseEntity;
 import bg.softuni.plantMe.models.enums.SunRequirements;
 import jakarta.persistence.*;
 

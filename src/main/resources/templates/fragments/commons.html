@@ -15,29 +15,29 @@
     <nav>
         <div class="home">
             <a th:href="@{/}">PlantMe App</a>
-            <a      sec:authorize="isAuthenticated()"
-                    th:href="">Add Plant</a>
+            <a      sec:authorize="hasRole('ROLE_ADMIN')"
+                    th:href="@{/add-plant}">Add Plant</a>
         </div>
         <div class="links">
-            <ul class="nav nav-pills nav-fill">
-            <li>
-                <a      sec:authorize="isAnonymous()"
+
+            <li sec:authorize="!isAuthenticated()">
+                <a
                         th:href="@{/users/login}">Login</a>
             </li>
 
-            <li>
-                <a      sec:authorize="isAnonymous()"
+            <li sec:authorize="!isAuthenticated()">
+                <a
                         th:href="@{/users/register}">Register</a>
             </li>
 
             <li sec:authorize="isAuthenticated()">
-                <form th:action="@{/logout}"
+                <form th:action="@{/users/logout}"
                       th:method="POST"
                         >
                 <button class="btn, btn-link" type="submit">Logout</button>
                 </form>
             </li>
-            </ul>
+
         </div>
     </nav>
 </header>

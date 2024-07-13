@@ -1,7 +1,7 @@
 package bg.softuni.plantMe.config;
 
 import bg.softuni.plantMe.repository.UserRepository;
-import bg.softuni.plantMe.service.UserDetailService;
+import bg.softuni.plantMe.service.PlantMeUserDetailService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ public class SecurityConfig {
                                  // "all static resources to common locations" (css, images etc.) are available for anyone
                                  .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                  // some more resources for all users
-                                 .requestMatchers("/", "users/login", "users/register").permitAll()
+                                 .requestMatchers("/", "users/login", "users/register", "users/login-error").permitAll()
                                  // all other URL-s should be authenticated
                                  .anyRequest().authenticated()
         )
@@ -31,20 +31,20 @@ public class SecurityConfig {
                                 .loginPage("/users/login")
                                 .usernameParameter("username")
                                 .passwordParameter("password")
-                                .defaultSuccessUrl("/home")
-                                .failureForwardUrl("/users/login")
+                                .defaultSuccessUrl("/")
+                                .failureUrl("/users/login-error")
                 )
                 .logout(logout ->
                         logout
-                                .logoutUrl("users/logout")
+                                .logoutUrl("/users/logout")
                                 .logoutSuccessUrl("/")
                                 .invalidateHttpSession(true)
                 )
                 .build();
     }
     @Bean
-    public UserDetailService userDetailService(UserRepository userRepository) {
-        return new UserDetailService(userRepository);
+    public PlantMeUserDetailService userDetailService(UserRepository userRepository) {
+        return new PlantMeUserDetailService(userRepository);
     }
     @Bean
     public PasswordEncoder passwordEncoder() {

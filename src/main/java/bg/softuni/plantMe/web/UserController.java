@@ -25,16 +25,16 @@ public class UserController {
     public UserRegisterDTO createUserRegisterDTO() {
         return new UserRegisterDTO();
     }
-
     @GetMapping("/login")
     public String viewLogin () {
         return "login";
     }
-
     @GetMapping("/register")
-    public String register () {
+    public String viewRegister () {
         return "register";
     }
+    @GetMapping("/login-error")
+    public String viewLoginError () { return "login-err"; }
     @PostMapping("/register")
     public String register (@Valid UserRegisterDTO data,
                             BindingResult bindingResult,

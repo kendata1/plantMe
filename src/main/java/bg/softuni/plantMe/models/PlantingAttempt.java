@@ -1,6 +1,5 @@
 package bg.softuni.plantMe.models;
 
-import bg.softuni.plantMe.BaseEntity;
 import jakarta.persistence.*;
 
 import java.time.Instant;

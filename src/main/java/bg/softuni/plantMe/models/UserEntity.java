@@ -1,12 +1,10 @@
 package bg.softuni.plantMe.models;
 
-import bg.softuni.plantMe.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,13 +20,18 @@ public class UserEntity extends BaseEntity {
     private String firstName;
     @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(nullable = false)
-    private String role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<UserRole> userRoles;
     @OneToMany (mappedBy = "userEntity")
     private Set<PlantingAttempt> plantingAttempts;
 
     public UserEntity() {
         this.plantingAttempts = new HashSet<>();
+        this.userRoles = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -71,11 +74,11 @@ public class UserEntity extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public String getRole() {
-        return role;
+    public List<UserRole> getUserRoles() {
+        return userRoles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 }

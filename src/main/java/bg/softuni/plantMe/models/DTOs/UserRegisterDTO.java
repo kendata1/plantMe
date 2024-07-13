@@ -19,6 +19,13 @@ public class UserRegisterDTO {
     @Size(min = 3, max = 20)
     String confirmPassword;
 
+    @NotBlank
+    @Size(min = 3, max = 20)
+    String firstName;
+    @NotBlank
+    @Size(min = 3, max = 20)
+    String lastName;
+
     public UserRegisterDTO() {}
 
     public String getUsername() {
@@ -51,5 +58,21 @@ public class UserRegisterDTO {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
