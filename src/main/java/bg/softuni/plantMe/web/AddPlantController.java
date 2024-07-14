@@ -37,7 +37,7 @@ public class AddPlantController {
     public String viewAddPlant (Model model) {
         model.addAttribute("plantNames",plantService.getPlantFamilyNames());
         model.addAttribute("sunRequirements", SunRequirements.values());
-        System.out.println(System.getProperty("user.dir"));
+
         return "add-plant";
     }
     @PostMapping("/add-plant")
@@ -47,7 +47,7 @@ public class AddPlantController {
                             RedirectAttributes redirectAttributes) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("addPaintingDTO", addPlantDTO);
+            redirectAttributes.addFlashAttribute("addPlantDTO", addPlantDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addPlantDTO", bindingResult);
             return "redirect:/add-plant";
         }

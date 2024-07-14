@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<main class="p-5">
+    <h1 class="primary-text text-center m-3 p-4">Plant Families</h1>
+    <hr class="my-3 bg-white w-75"/>
+    <div th:each="plantFamily : ${allPlantFamilies}" class="d-flex mt-5 mb-5 plant-container text-center justify-content-around">
+        <div class="w-50 pt-4 pb-4">
+            <img style="border-radius: 6px;"
+                 th:src="${plantFamily.imageUrl}"
+                 alt="Plant image"
+                 class="img-fluid" >
+        </div>
+        <div>
+            <h2 class="white-blue-text pt-4 pb-4" th:text="${plantFamily.name} + '(' + ${plantFamily.alias} + ')'" ></h2>
+            <a class="btn-link" th:href="@{/plant-family/{id}(id=${plantFamily.id})}">Learn more</a>
+        </div>
+
+    </div>
+</main>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

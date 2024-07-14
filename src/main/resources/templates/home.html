@@ -4,17 +4,15 @@
 <head th:replace="fragments/commons::head"></head>
 <body>
 <header th:replace="fragments/commons::nav"></header>
-<main>
-
-
+<main class="p-5">
     <h1 class="primary-text text-center m-3 p-4">Browse Plants</h1>
     <hr class="my-3 bg-white w-75"/>
-    <div class="m-2 p-2 text-center justify-content-center d-flex" id="homePlantContainer">
+    <div class="p-4 mt-5 text-center justify-content-center d-flex plant-container" id="homePlantContainer">
         <a class="card m-2" style="max-width: 15%; background-color: darkslategray;" th:each="plant : ${allPlants}" th:href="@{/plants/{id}(id=${plant.id})}">
             <!--<div  class="card m-2"  style="background-color: antiquewhite;">-->
             <img th:src="${plant.imageUrl}" class="card-img-top" alt="Plant image">
             <div class="card-footer ">
-                <h5 class="card-title" th:text="${plant.name}">Card title</h5>
+                <h5 class="card-title " th:text="${plant.name}">Card title</h5>
             <!--</div>-->
         </div>
         </a>

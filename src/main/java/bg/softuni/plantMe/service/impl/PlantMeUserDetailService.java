@@ -1,4 +1,4 @@
-package bg.softuni.plantMe.service;
+package bg.softuni.plantMe.service.impl;
 
 import bg.softuni.plantMe.models.UserEntity;
 import bg.softuni.plantMe.models.UserRole;

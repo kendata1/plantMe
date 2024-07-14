@@ -4,11 +4,11 @@
 <head th:replace="fragments/commons::head"></head>
 <body>
 <header th:replace="fragments/commons::nav"></header>
-<main>
+<main class="m-5" style="background-color: rgb(84 91 98 / 40%); backdrop-filter: blur(35px)";>
 
     <h1 class="primary-text text-center m-3 p-3" th:text="${plantDetails.name}">Plant name</h1>
-
-    <div class="row justify-content-between p-4 primary-text" style="background-color: rgb(84 91 98 / 40%);">
+    <hr class="my-3 bg-white w-50"/>
+    <div class="row justify-content-between p-4 primary-text" >
         <div class="col-6">
             <img style="border-radius: 6px" th:src="${plantDetails.imageUrl}" class="img-fluid" alt="Plant image">
 

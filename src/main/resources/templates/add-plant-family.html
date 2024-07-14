@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<main>
+    <form class="welcome login"
+          th:action="@{/add-plant-family}"
+          th:method="POST"
+          enctype="multipart/form-data"
+          th:object="${plantFamilyDTO}">
+
+        <div class="form-group">
+            <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Plant Family</span></h1>
+            <div class="label-holder text-white d-flex justify-content-center">
+                <label th:for="name" class="h3 mb-2">Plant family name</label>
+            </div>
+            <input  th:field="*{name}"
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"/>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white d-flex justify-content-center">
+                <label th:for="alias" class="h3 mb-2">Plant family alias</label>
+            </div>
+            <input  th:field="*{alias}"
+                    type="text"
+                    class="form-control"
+                    id="alias"
+                    name="alias"/>
+        </div>
+
+        <div class="form-group">
+            <div class="label-holder text-white d-flex justify-content-center">
+                <label th:for="description" class="h3 mb-2">Description</label>
+            </div>
+            <textarea type="number"
+                      class="form-control"
+                      id="description"
+                      name="description"
+                      rows="10"
+                      cols="2">
+            </textarea>
+        </div>
+
+        <div class="form-group mb-3">
+            <div class="label-holder text-white d-flex justify-content-center">
+                <label for="image" class="h3 mb-2">Upload image</label>
+            </div>
+            <input type="file"
+                   class="form-control form-control-sm"
+                   id="image"
+                   name="image"
+                   accept="image/*"
+            >
+        </div>
+
+
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit">Add plant family</button>
+        </div>
+
+    </form>
+</main>
+
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

@@ -1,7 +1,7 @@
 package bg.softuni.plantMe.config;
 
 import bg.softuni.plantMe.repository.UserRepository;
-import bg.softuni.plantMe.service.PlantMeUserDetailService;
+import bg.softuni.plantMe.service.impl.PlantMeUserDetailService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

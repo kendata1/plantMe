@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<main>
+    <div class="d-flex p-5 m-3 plant-container">
+        <div class="w-75 pr-3">
+            <img style="border-radius: 6px"
+                 th:src="${plantFamilyDetails.imageUrl}"
+                 class="img-fluid" alt="Plant image">
+        </div>
+
+        <div class="w-25">
+
+        </div>
+
+    </div>
+</main>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

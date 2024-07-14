@@ -22,6 +22,8 @@ nav {
 }
 
 nav .home {
+    display: flex;
+    gap: 16px;
     padding: 0.5em 1em;
     flex: 1 0 50%;
 }
@@ -72,16 +74,17 @@ textarea {
     box-shadow: 0 1px 5px black;
     backdrop-filter: blur(35px);
     z-index: 1;
-
 }
-#homePlantContainer {
+.plant-container {
     background-color: rgb(84 91 98 / 10%);
-}
-
-.welcome:hover {
+    margin-top: 8em;
+    text-align: center;
     box-shadow: 0 1px 5px black;
     backdrop-filter: blur(35px);
-
+    border-radius: 12px;
+    max-width: 1540px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .login {
@@ -130,12 +133,6 @@ ul li:hover {
     justify-content: start;
     padding-left: 0.5em;
     gap: 55px;
-}
-.my-paintings {
-    border-radius: 4px;
-    padding: 6px;
-    color: rgba(207, 230, 243, 0.78);
-    background-color: rgba(87, 86, 83, 0.92);
 }
 
 .most-rated {
@@ -188,6 +185,11 @@ button {
 
 button:hover {
     background-color: rgb(39, 63, 77);
+}
+
+.btn-link:hover {
+    color: #d1ddf1;
+    text-decoration: none;
 }
 
 .primary-text {
@@ -274,6 +276,12 @@ footer {
 a {
     color: #b5d8f1;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.white-blue-text {
+    color: #b5d8f1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-decoration: none;
 }
 
 a:hover {
