@@ -3,6 +3,7 @@ package bg.softuni.plantMe.models;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "planting_attempts")
@@ -16,7 +17,7 @@ public class PlantingAttempt extends BaseEntity {
     @Column(nullable = false)
     private String variety;
     @Column(name = "planting_date", nullable = false)
-    private Instant plantingDate;
+    private LocalDate plantingDate;
     private String seedInfo;
     private String seedlingInfo;
 
@@ -44,11 +45,19 @@ public class PlantingAttempt extends BaseEntity {
         this.variety = variety;
     }
 
-    public Instant getPlantingDate() {
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
+    public LocalDate getPlantingDate() {
         return plantingDate;
     }
 
-    public void setPlantingDate(Instant plantingDate) {
+    public void setPlantingDate(LocalDate plantingDate) {
         this.plantingDate = plantingDate;
     }
 
