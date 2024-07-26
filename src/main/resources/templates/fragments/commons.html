@@ -15,7 +15,7 @@
 <header>
     <nav>
         <div class="home">
-            <a th:href="@{/}">PlantMe App</a>
+            <a th:href="@{/}" th:text="#{nav_bar_plantMe}">PlantMe App</a>
             <div class="dropdown" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="dropdown-toggle white-blue-text" href="#" id="navbarDropdown" role="button"
                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,18 +32,31 @@
 
             <li sec:authorize="!isAuthenticated()">
                 <a
-                        th:href="@{/users/login}">Login</a>
+                        th:href="@{/users/login}" th:text="#{nav_bar_login}">Login</a>
             </li>
 
             <li sec:authorize="!isAuthenticated()">
                 <a
-                        th:href="@{/users/register}">Register</a>
+                        th:href="@{/users/register}" th:text="#{nav_bar_register}">Register</a>
             </li>
 
             <li sec:authorize="isAuthenticated()">
                 <form th:action="@{/users/logout}"
                       th:method="POST">
                     <button class="btn, btn-link white-blue-text p-0" type="submit" style="font-weight: inherit;">Logout</button>
+                </form>
+            </li>
+
+            <li>
+                <form
+                      th:method="GET">
+                    <select
+                            id="lang"
+                            name="lang"
+                    onchange="this.form.submit()">
+                        <option value="en_US" th:selected="${#locale.toString() == 'en_US'}">EN</option>
+                        <option value="bg_BG" th:selected="${#locale.toString() == 'bg_BG'}">BG</option>
+                    </select>
                 </form>
             </li>
         </div>

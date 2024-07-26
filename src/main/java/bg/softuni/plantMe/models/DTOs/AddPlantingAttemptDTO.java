@@ -15,11 +15,9 @@ public class AddPlantingAttemptDTO {
     private String variety;
     @NotBlank
     private LocalDate plantingDate;
-    @NotBlank
-    @Size(min = 2, max = 255)
+    @Size(max = 255)
     private String seedInfo;
-    @NotBlank
-    @Size(min = 2, max = 255)
+    @Size(max = 255)
     private String seedlingInfo;
 
     public AddPlantingAttemptDTO () {}

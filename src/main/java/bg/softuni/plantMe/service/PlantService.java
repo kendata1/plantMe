@@ -11,4 +11,5 @@ public interface PlantService {
     public void addPlant (AddPlantDTO addPlantDTO, String fileName);
     public List<PlantShortInfoDTO> getAllPlantsShortInfo();
     public PlantFullInfoDTO showPlantDetails(Long id);
+    public List<String> getAllPlantNames();
 }

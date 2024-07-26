@@ -60,5 +60,8 @@ public class PlantServiceImpl implements PlantService {
         throw new RuntimeException("Optional plant with id " + id +" not found!");
     }
 
-
+    @Override
+    public List<String> getAllPlantNames() {
+       return plantRepository.findAll().stream().map(Plant::getName).collect(Collectors.toList());
+    }
 }

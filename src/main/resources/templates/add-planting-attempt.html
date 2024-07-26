@@ -9,23 +9,11 @@
           th:action="@{/add-planting-attempt}"
           th:method="POST"
           enctype="multipart/form-data"
-          th:object="${addPlantDTO}">
-
-        <div class="form-group">
-            <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Plant</span></h1>
-            <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="plantName" class="h3 mb-2">Plant name</label>
-            </div>
-            <input  th:field="*{name}"
-                    type="text"
-                    class="form-control"
-                    id="plantName"
-                    name="plantName"/>
-        </div>
+          th:object="${addPlantingAttemptDTO}">
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="plantFamily" class="h3 mb-2">Plant Family</label>
+                <label th:for="plantName" class="h3 mb-2">Plant</label>
             </div>
             <select id="plantFamily" class="form-control" name="plantFamily">
                 <option value="">- Select plant family -</option>
@@ -38,18 +26,17 @@
         </div>
 
         <div class="form-group">
+            <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Plant</span></h1>
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="sunRequirements" class="h3 mb-2">Sun Requirements</label>
+                <label th:for="variety" class="h3 mb-2">Variety</label>
             </div>
-            <select id="sunRequirements" class="form-control" name="sunRequirements">
-                <option value="">- Select sun requirement -</option>
-                <option th:each="sunReq: ${sunRequirements}"
-                        th:value="${sunReq}"
-                        th:text="${sunReq}">
-                    IMAGINARY REQUIREMENTS
-                </option>
-            </select>
+            <input  th:field="*{variety}"
+                    type="text"
+                    class="form-control"
+                    id="variety"
+                    name="variety"/>
         </div>
+
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
@@ -63,37 +50,36 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="maxSpacing" class="h3 mb-2">Max spacing (cm)</label>
+                <label th:for="plantingDate" class="h3 mb-2">Planting date</label>
             </div>
-            <input  type="number"
+            <input  type="date"
                     class="form-control"
-                    id="maxSpacing"
-                    name="maxSpacing"/>
+                    id="plantingDate"
+                    name="plantingDate"/>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="information" class="h3 mb-2">Information</label>
+                <label for="seedInfo" class="h3 mb-2">Seed info</label>
             </div>
-            <textarea type="number"
-                      class="form-control"
-                      id="information"
-                      name="information"
+            <textarea class="form-control"
+                      id="seedInfo"
+                      name="seedInfo"
                       rows="10"
                       cols="2">
             </textarea>
         </div>
 
-        <div class="form-group mb-3">
+        <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="image" class="h3 mb-2">Upload image</label>
+                <label for="seedlingInfo" class="h3 mb-2">Seedling info</label>
             </div>
-            <input type="file"
-                   class="form-control form-control-sm"
-                   id="image"
-                   name="image"
-                   accept="image/*"
-            >
+            <textarea class="form-control"
+                      id="seedlingInfo"
+                      name="seedlingInfo"
+                      rows="10"
+                      cols="2">
+            </textarea>
         </div>
 
 
