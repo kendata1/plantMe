@@ -8,11 +8,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -24,7 +26,7 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
     private final Gson gson;
     private final ModelMapper modelMapper;
     private final CurrentWeatherRepository currentWeatherRepository;
-    public CurrentWeatherServiceImpl(RestClient restClient, Gson gson, ModelMapper modelMapper, CurrentWeatherRepository currentWeatherRepository) {
+    public CurrentWeatherServiceImpl(@Qualifier("genericRestClient") RestClient restClient, Gson gson, ModelMapper modelMapper, CurrentWeatherRepository currentWeatherRepository) {
         this.restClient = restClient;
         this.gson = gson;
         this.modelMapper = modelMapper;
@@ -50,7 +52,6 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
 
     public CurrentWeather map (CurrentWeatherDTO currentWeatherDTO) {
         CurrentWeather currentWeather = modelMapper.map(currentWeatherDTO, CurrentWeather.class);
-        String[] timeArr = currentWeatherDTO.getTime().split("T");
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         currentWeather.setTime(LocalDateTime.parse(getCurrentWeather().getTime(),dateTimeFormatter));
@@ -86,9 +87,9 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
 
         currentWeatherRepository.save(weather1);
     }
-    @Scheduled (cron = "* */10 * * * *")
+    @Scheduled (fixedDelay = 10000000)
     public void updateCurrentWeather () {
         fetchCurrentWeather();
-        System.out.println("Weather updated");
+        System.out.println("Weather updated" + LocalDateTime.now());
     }
 }

@@ -27,3 +27,6 @@ logging:
       SQL: debug
       type:
         descriptor: trace
+attempts:
+  api:
+    baseUrl: "http//localhost:8081"
