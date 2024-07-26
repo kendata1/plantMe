@@ -6,27 +6,27 @@
 <header th:replace="fragments/commons::nav"></header>
 <main>
     <form class="welcome login"
-          th:action="@{/add-planting-attempt}"
+          th:action="@{/attempts/add}"
           th:method="POST"
           enctype="multipart/form-data"
-          th:object="${addPlantingAttemptDTO}">
+          th:object="${plantingAttemptDTO}">
 
         <div class="form-group">
-            <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="plantName" class="h3 mb-2">Plant</label>
-            </div>
-            <select id="plantFamily" class="form-control" name="plantFamily">
-                <option value="">- Select plant family -</option>
-                <option th:each="name: ${plantNames}"
+            <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark mb-3">Add Attempt</span></h1>
+            <select id="plant" class="form-control" name="plant">
+                <option value="">- Select plant -</option>
+                <option th:field="*{plant}"
+                        th:each="name: ${plantNames}"
                         th:value="${name}"
                         th:text="${name}">
+
                     IMAGINARY NAME
                 </option>
             </select>
         </div>
 
         <div class="form-group">
-            <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Plant</span></h1>
+
             <div class="label-holder text-white d-flex justify-content-center">
                 <label th:for="variety" class="h3 mb-2">Variety</label>
             </div>
@@ -35,17 +35,6 @@
                     class="form-control"
                     id="variety"
                     name="variety"/>
-        </div>
-
-
-        <div class="form-group">
-            <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="minSpacing" class="h3 mb-2">Min spacing (cm)</label>
-            </div>
-            <input  type="number"
-                    class="form-control"
-                    id="minSpacing"
-                    name="minSpacing"/>
         </div>
 
         <div class="form-group">
@@ -65,7 +54,7 @@
             <textarea class="form-control"
                       id="seedInfo"
                       name="seedInfo"
-                      rows="10"
+                      rows="5"
                       cols="2">
             </textarea>
         </div>
@@ -77,7 +66,7 @@
             <textarea class="form-control"
                       id="seedlingInfo"
                       name="seedlingInfo"
-                      rows="10"
+                      rows="5"
                       cols="2">
             </textarea>
         </div>

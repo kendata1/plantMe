@@ -29,18 +29,17 @@ public class PlantingAttemptServiceImpl implements PlantingAttemptService {
 
         attemptsRestClient
                 .post()
-                .uri("/attempts/add")
-                .accept(MediaType.APPLICATION_JSON)
+                .uri("http://localhost:8081/attempts/add")
                 .body(addPlantingAttemptDTO)
                 .retrieve();
     }
 
     @Override
-    public List<PlantingAttemptDTO> getAllPlantingAttemptsForUser(Long userId) {
-        LOGGER.info("Get all Attempts by User ID");
+    public List<PlantingAttemptDTO> getAllPlantingAttemptsForUser(String username) {
+        LOGGER.info("Get all Attempts by username");
         return attemptsRestClient
                 .get()
-                .uri("attempts/all")
+                .uri("attempts/{username}/all", username)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {});

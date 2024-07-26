@@ -1,9 +1,9 @@
 package bg.softuni.plantMe.models.DTOs;
 
 public class PlantingAttemptDTO {
-    private Long id;
+    private String id;
     private String plant;
-    private Long userId;
+    private String username;
     private String variety;
     private String plantingDate;
     private String seedInfo;
@@ -11,12 +11,20 @@ public class PlantingAttemptDTO {
 
     public PlantingAttemptDTO() {}
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPlant() {
@@ -27,13 +35,6 @@ public class PlantingAttemptDTO {
         this.plant = plant;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 
     public String getVariety() {
         return variety;
@@ -71,7 +72,7 @@ public class PlantingAttemptDTO {
     public String toString() {
         return "AddPlantingAttemptDTO{" +
                 "plant='" + plant + '\'' +
-                ", userId=" + userId +
+                ", username=" + username +
                 ", variety='" + variety + '\'' +
                 ", plantingDate=" + plantingDate +
                 ", seedInfo='" + seedInfo + '\'' +

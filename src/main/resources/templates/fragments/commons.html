@@ -27,6 +27,8 @@
                     </ul>
             </div>
             <a sec:authorize="isAuthenticated()" th:href="@{/plant-families}">Plant Families</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/attempts/add}">Add Attempt</a>
+
         </div>
         <div class="links">
 
@@ -39,7 +41,9 @@
                 <a
                         th:href="@{/users/register}" th:text="#{nav_bar_register}">Register</a>
             </li>
-
+            <li>
+            <a sec:authorize="isAuthenticated()" th:href="@{/plant-families}">My Profile</a>
+            </li>
             <li sec:authorize="isAuthenticated()">
                 <form th:action="@{/users/logout}"
                       th:method="POST">

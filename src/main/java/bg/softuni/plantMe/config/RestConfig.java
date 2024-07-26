@@ -14,9 +14,8 @@ public class RestConfig {
     }
 
     @Bean("attemptsRestClient")
-    public RestClient attemptsRestClient (AttemptsApiConfig attemptsApiConfig) {
+    public RestClient attemptsRestClient () {
         return RestClient.builder()
-                .baseUrl(attemptsApiConfig.getBaseUrl())
                 .defaultHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
