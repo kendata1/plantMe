@@ -7,20 +7,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
 @RequestMapping("/plants")
-public class PlantDetailsController {
-
+public class PlantController {
     private final PlantService plantService;
 
-    public PlantDetailsController(PlantService plantService) {
+    public PlantController(PlantService plantService) {
         this.plantService = plantService;
     }
 
+    @GetMapping()
+    public String allPlants(Model model) {
+        model.addAttribute("allPlants", plantService.getAllPlantsShortInfo());
+        return "plants";
+    }
+
     @GetMapping("/{id}")
-    public String viewPlantDetails (@PathVariable("id") Long id, Model model) {
+    public String viewPlantDetails(@PathVariable("id") Long id, Model model) {
         model.addAttribute("plantDetails", plantService.showPlantDetails(id));
         return "plant-details";
     }
 }
+

@@ -57,6 +57,6 @@ public class AddPlantController {
 
         plantService.addPlant(addPlantDTO, file.getOriginalFilename());
 
-        return "redirect:/home";
+        return "redirect:/plants";
     }
 }

@@ -4,9 +4,9 @@ import bg.softuni.plantMe.models.CurrentWeather;
 import bg.softuni.plantMe.models.DTOs.CurrentWeatherDTO;
 
 public interface CurrentWeatherService {
+    CurrentWeatherDTO fetchCurrentWeather ();
+    CurrentWeather map (CurrentWeatherDTO currentWeatherDTO);
+    void updateCurrentWeather ();
+    boolean isInitializedWeather ();
     CurrentWeatherDTO getCurrentWeather ();
-    public CurrentWeather map (CurrentWeatherDTO currentWeatherDTO);
-    public void saveCurrentWeather (CurrentWeather currentWeather);
-    public void fetchCurrentWeather ();
-    public boolean isInitializedWeather ();
 }

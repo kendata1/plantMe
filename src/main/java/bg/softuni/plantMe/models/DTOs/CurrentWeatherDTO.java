@@ -1,15 +1,62 @@
 package bg.softuni.plantMe.models.DTOs;
 
-import java.time.LocalDateTime;
+import com.google.gson.annotations.SerializedName;
 
 public class CurrentWeatherDTO {
     private String time;
-    private int interval;
-    private double temperature_2m;
+    @SerializedName("temperature_2m")
+    private double temperature;
+    @SerializedName("is_day")
+    private int isDay;
+    @SerializedName("cloud_cover")
+    private double cloudCover;
     private double rain;
-    private double wind_speed_10m;
+    @SerializedName("wind_speed_10m")
+    private double windSpeed;
+    private int interval;
+    private String imageUrl;
 
     public CurrentWeatherDTO () {}
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
+    public int getIsDay() {
+        return isDay;
+    }
+
+    public void setIsDay(int isDay) {
+        this.isDay = isDay;
+    }
+
+    public double getCloudCover() {
+        return cloudCover;
+    }
+
+    public void setCloudCover(double cloudCover) {
+        this.cloudCover = cloudCover;
+    }
+
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+
+    public void setWindSpeed(double windSpeed) {
+        this.windSpeed = windSpeed;
+    }
 
     public String getTime() {
         return time;
@@ -36,30 +83,17 @@ public class CurrentWeatherDTO {
         this.rain = rain;
     }
 
-    public double getTemperature_2m() {
-        return temperature_2m;
-    }
-
-    public void setTemperature_2m(double temperature_2m) {
-        this.temperature_2m = temperature_2m;
-    }
-
-    public double getWind_speed_10m() {
-        return wind_speed_10m;
-    }
-
-    public void setWind_speed_10m(double wind_speed_10m) {
-        this.wind_speed_10m = wind_speed_10m;
-    }
 
     @Override
     public String toString() {
         return "CurrentWeatherDTO{" +
-                "time=" + time +
-                ", interval=" + interval +
-                ", temperature_2m=" + temperature_2m +
+                "time='" + time + '\'' +
+                ", temperature=" + temperature +
+                ", isDay=" + isDay +
+                ", cloudCover=" + cloudCover +
                 ", rain=" + rain +
-                ", wind_speed_10m=" + wind_speed_10m +
+                ", windSpeed=" + windSpeed +
+                ", interval=" + interval +
                 '}';
     }
 }

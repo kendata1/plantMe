@@ -76,6 +76,8 @@ textarea {
     z-index: 1;
 }
 .plant-container {
+    display: flex;
+    flex-wrap: wrap;
     background-color: rgb(84 91 98 / 10%);
     margin-top: 8em;
     text-align: center;

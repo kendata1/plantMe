@@ -63,7 +63,7 @@ public class PlantFamilyController {
         return "redirect:/home";
     }
 
-    @GetMapping("/plant-families")
+    @GetMapping("/plantFamilies")
     public String allPlantFamiliesView () {
         return "plant-families";
     }

@@ -13,6 +13,10 @@ public class CurrentWeather extends BaseEntity{
     @Column(nullable = false)
     private double temperature;
     @Column(nullable = false)
+    private int isDay;
+    @Column(nullable = false, name = "cloud_cover")
+    private double cloudCover;
+    @Column(nullable = false)
     private double rain;
     @Column(nullable = false, name = "wind_speed")
     private double windSpeed;
@@ -35,6 +39,22 @@ public class CurrentWeather extends BaseEntity{
         this.temperature = temperature;
     }
 
+    public int getIsDay() {
+        return isDay;
+    }
+
+    public void setIsDay(int isDay) {
+        this.isDay = isDay;
+    }
+
+    public double getCloudCover() {
+        return cloudCover;
+    }
+
+    public void setCloudCover(double cloudCover) {
+        this.cloudCover = cloudCover;
+    }
+
     public double getRain() {
         return rain;
     }
@@ -49,5 +69,17 @@ public class CurrentWeather extends BaseEntity{
 
     public void setWindSpeed(double windSpeed) {
         this.windSpeed = windSpeed;
+    }
+
+    @Override
+    public String toString() {
+        return "CurrentWeather{" +
+                "time=" + time +
+                ", temperature=" + temperature +
+                ", isDay=" + isDay +
+                ", cloudCover=" + cloudCover +
+                ", rain=" + rain +
+                ", windSpeed=" + windSpeed +
+                '}';
     }
 }

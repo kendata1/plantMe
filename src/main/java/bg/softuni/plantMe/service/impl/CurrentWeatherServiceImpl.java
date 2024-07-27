@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
-import java.time.LocalDate;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -26,6 +26,7 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
     private final Gson gson;
     private final ModelMapper modelMapper;
     private final CurrentWeatherRepository currentWeatherRepository;
+
     public CurrentWeatherServiceImpl(@Qualifier("genericRestClient") RestClient restClient, Gson gson, ModelMapper modelMapper, CurrentWeatherRepository currentWeatherRepository) {
         this.restClient = restClient;
         this.gson = gson;
@@ -34,33 +35,24 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
     }
 
     @Override
-    public CurrentWeatherDTO getCurrentWeather() {
+    public CurrentWeatherDTO fetchCurrentWeather() {
         String requestBody = restClient.get()
-                .uri("https://api.open-meteo.com/v1/forecast?latitude=42.15&longitude=24.75&current=temperature_2m,rain,wind_speed_10m")
+                .uri("https://api.open-meteo.com/v1/forecast?latitude=42.15&longitude=24.75&current=temperature_2m,is_day,rain,cloud_cover,wind_speed_10m")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(String.class);
 
-        if(requestBody != null) {
+        if (requestBody != null) {
             String[] split = requestBody.split("\"current\":");
             String neededJson = split[1].substring(0, split[1].length() - 1);
             JsonObject jsonObject = JsonParser.parseString(neededJson).getAsJsonObject();
-            return gson.fromJson(jsonObject, CurrentWeatherDTO.class);
+            System.out.println(jsonObject.toString());
+            CurrentWeatherDTO currentWeatherDTO = gson.fromJson(jsonObject, CurrentWeatherDTO.class);
+            System.out.println(currentWeatherDTO);
+
+            return currentWeatherDTO;
         }
         return null;
-    }
-
-    public CurrentWeather map (CurrentWeatherDTO currentWeatherDTO) {
-        CurrentWeather currentWeather = modelMapper.map(currentWeatherDTO, CurrentWeather.class);
-
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        currentWeather.setTime(LocalDateTime.parse(getCurrentWeather().getTime(),dateTimeFormatter));
-
-        return currentWeather;
-    }
-
-    public void saveCurrentWeather (CurrentWeather currentWeather) {
-        currentWeatherRepository.save(currentWeather);
     }
 
     @Override
@@ -68,15 +60,14 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
         return currentWeatherRepository.count() > 0;
     }
 
+    public void updateCurrentWeather() {
 
-    public void fetchCurrentWeather () {
+        CurrentWeather currentWeather = map(fetchCurrentWeather());
 
-       CurrentWeather currentWeather = map(getCurrentWeather());
-
-       if(!isInitializedWeather()) {
-           currentWeatherRepository.save(currentWeather);
-           return;
-       }
+        if (!isInitializedWeather()) {
+            currentWeatherRepository.save(currentWeather);
+            return;
+        }
         Optional<CurrentWeather> optional = currentWeatherRepository.findAll().stream().findFirst();
         CurrentWeather weather1 = optional.orElseThrow();
 
@@ -84,12 +75,56 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
         weather1.setRain(currentWeather.getRain());
         weather1.setWindSpeed(currentWeather.getWindSpeed());
         weather1.setTemperature(currentWeather.getTemperature());
+        weather1.setIsDay(currentWeather.getIsDay());
+        weather1.setCloudCover(currentWeather.getCloudCover());
 
         currentWeatherRepository.save(weather1);
     }
-    @Scheduled (fixedDelay = 10000000)
-    public void updateCurrentWeather () {
-        fetchCurrentWeather();
-        System.out.println("Weather updated" + LocalDateTime.now());
+
+    @Scheduled(fixedDelay = 1000000)
+    public void scheduledUpdateCurrentWeather() {
+        updateCurrentWeather();
+        System.out.println("Weather updated " + LocalDateTime.now());
     }
+
+    @Override
+    public CurrentWeatherDTO getCurrentWeather() {
+        CurrentWeather currentWeather = currentWeatherRepository.findAll().get(0);
+
+        CurrentWeatherDTO mapped = modelMapper.map(currentWeather, CurrentWeatherDTO.class);
+
+        mapped.setImageUrl(choseWeatherImage(mapped));
+        mapped.setRain(currentWeather.getRain() * 100.00);
+        return mapped;
+    }
+
+    private String choseWeatherImage(CurrentWeatherDTO currentWeatherDTO) {
+        if (currentWeatherDTO.getIsDay() == 1) {
+            if (currentWeatherDTO.getRain() > 0.6) {
+                return "/images/weather/day_rain.png";
+            }
+            if (currentWeatherDTO.getCloudCover() > 50) {
+                return "/images/weather/day_cloudy.png";
+            }
+            return "/images/weather/day_clear.png";
+        }
+
+        if (currentWeatherDTO.getRain() > 0.6) {
+            return "/images/weather/night_rain.png";
+        }
+        if (currentWeatherDTO.getCloudCover() > 50) {
+            return "/images/weather/night_cloudy.png";
+        }
+        return "/images/weather/night_clear.png";
+    }
+
+
+public CurrentWeather map(CurrentWeatherDTO currentWeatherDTO) {
+    CurrentWeather currentWeather = modelMapper.map(currentWeatherDTO, CurrentWeather.class);
+
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+    currentWeather.setTime(LocalDateTime.parse(fetchCurrentWeather().getTime(), dateTimeFormatter));
+
+    return currentWeather;
+}
 }
