@@ -4,19 +4,19 @@
 <head th:replace="fragments/commons::head"></head>
 
 <body>
-    <div class="welcome">
-        <h1>Failed to log in our site.</h1>
+    <div class="welcome ml-3 mr-3">
+        <h1 th:text="#{login_err_failed_to_log_in}">Failed to log in our site.</h1>
         <hr class="my-3 bg-white w-50"/>
 
-        <p class="h4">
+        <p class="h4" th:text="#{login_err_wrong}">
             Wrong username or password</p>
         <hr class="my-3 bg-white w-75"/>
 
         <h3>
-            <a class="primary-text" th:href="@{/users/login}">Try again</a>
-            if you have an account or
-            <a class="primary-text" th:href="@{/users/register}">Register </a>
-            now.
+            <a class="primary-text" th:href="@{/users/login}" th:text="#{login_err_try_again}">Try again</a>
+            <span th:text="#{login_err_if_you_have_acc}"></span>
+            <a class="primary-text" th:href="@{/users/register}" th:text="#{login_err_register}">Register </a>
+            <span th:text="#{index_register_now}"></span>
         </h3>
     </div>
     <footer th:replace="fragments/commons::footer"></footer>

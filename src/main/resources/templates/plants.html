@@ -5,7 +5,7 @@
 <body>
 <header th:replace="fragments/commons::nav"></header>
 <main class="p-5">
-    <h1 class="primary-text text-center m-3 p-4">Browse Plants</h1>
+    <h1 class="primary-text text-center m-3 p-4" th:text="#{browse_plants}">Browse Plants</h1>
     <hr class="my-3 bg-white w-75"/>
     <div class="p-4 mt-5 text-center justify-content-center d-flex plant-container" id="homePlantContainer">
         <a class="card m-2" style="max-width: 15%; background-color: darkslategray;" th:each="plant : ${allPlants}" th:href="@{/plants/{id}(id=${plant.id})}">

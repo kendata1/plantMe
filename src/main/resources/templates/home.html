@@ -32,12 +32,12 @@
     </section>
         <section class="col-8 plant-container mr-4 justify-content-center">
         <div th:object="${currentWeatherDTO}" style="color: #b5d8f1; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
-            <h3 class="p-5" th:text="#{home_weather_in_Plovdiv}">Времето в Пловдив</h3>
-            <img id="box-a-img" th:src="*{imageUrl}" height="35%" alt="weather image" class="p-4">
-            <h3 class="p-2"><span th:text="*{temperature}" id="box-a-temp">15</span><span>&#8451;</span></h3>
+            <h3 class="p-4" th:text="#{home_weather_in_Plovdiv}">Времето в Пловдив</h3>
+            <img id="box-a-img" th:src="*{imageUrl}" height="35%" alt="weather image">
+            <h3 class="p-4"><span th:text="*{temperature}" id="box-a-temp">15</span><span>&#8451;</span></h3>
             <h3 class="p-2" th:text="#{home_rain_chance} + ' ' + *{rain} +'%'" ></h3>
             <h3 class="p-2" th:text="#{home_wind_speed}+' '+ *{windSpeed}"></h3>
-            <h5 class="p-2 mt-4" th:text="#{home_last_update} + ' ' + *{time}"></h5>
+            <h5 class="p-2 mt-2" th:text="#{home_last_update} + ' ' + *{time}"></h5>
 
         </div>
         </section>

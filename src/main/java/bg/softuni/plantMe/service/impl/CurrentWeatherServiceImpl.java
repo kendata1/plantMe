@@ -13,8 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
-
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -46,11 +44,9 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
             String[] split = requestBody.split("\"current\":");
             String neededJson = split[1].substring(0, split[1].length() - 1);
             JsonObject jsonObject = JsonParser.parseString(neededJson).getAsJsonObject();
-            System.out.println(jsonObject.toString());
-            CurrentWeatherDTO currentWeatherDTO = gson.fromJson(jsonObject, CurrentWeatherDTO.class);
-            System.out.println(currentWeatherDTO);
 
-            return currentWeatherDTO;
+
+            return gson.fromJson(jsonObject, CurrentWeatherDTO.class);
         }
         return null;
     }
@@ -95,6 +91,7 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
 
         mapped.setImageUrl(choseWeatherImage(mapped));
         mapped.setRain(currentWeather.getRain() * 100.00);
+        mapped.setTime(currentWeather.getTime().toString().replace("T"," "));
         return mapped;
     }
 

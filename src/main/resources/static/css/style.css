@@ -96,16 +96,7 @@ textarea {
 }
 
 .add-offer-form, .login {
-    width: 400px;
-}
-
-.login:hover span {
-    background-color: #5a6268;
-}
-
-.login:hover {
-    backdrop-filter: blur(2px);
-
+    width: 520px;
 }
 
 .home-fields {

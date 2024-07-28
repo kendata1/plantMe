@@ -12,9 +12,9 @@
           th:object="${addPlantDTO}">
 
         <div class="form-group">
-            <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Plant</span></h1>
+            <h1 class="text-center mt-3 mb-5"><span class="badge badge-pill badge-dark" th:text="#{add_plant}">Add Plant</span></h1>
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="plantName" class="h3 mb-2">Plant name</label>
+                <label th:for="plantName" class="h3 mb-2" th:text="#{plant_name}">Plant name</label>
             </div>
             <input  th:field="*{name}"
                     type="text"
@@ -25,7 +25,7 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="plantFamily" class="h3 mb-2">Plant Family</label>
+                <label th:for="plantFamily" class="h3 mb-2" th:text="#{plant_family}">Plant Family</label>
             </div>
             <select id="plantFamily" class="form-control" name="plantFamily">
                 <option value="">- Select plant family -</option>
@@ -39,7 +39,7 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="sunRequirements" class="h3 mb-2">Sun Requirements</label>
+                <label th:for="sunRequirements" class="h3 mb-2" th:text="#{sun_requirements}">Sun Requirements</label>
             </div>
             <select id="sunRequirements" class="form-control" name="sunRequirements">
                 <option value="">- Select sun requirement -</option>
@@ -53,7 +53,7 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="minSpacing" class="h3 mb-2">Min spacing (cm)</label>
+                <label th:for="minSpacing" class="h3 mb-2" th:text="#{min_spacing}">Min spacing (cm)</label>
             </div>
             <input  type="number"
                     class="form-control"
@@ -63,7 +63,7 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="maxSpacing" class="h3 mb-2">Max spacing (cm)</label>
+                <label th:for="maxSpacing" class="h3 mb-2" th:text="#{max_spacing}">Max spacing (cm)</label>
             </div>
             <input  type="number"
                     class="form-control"
@@ -73,7 +73,7 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="information" class="h3 mb-2">Information</label>
+                <label for="information" class="h3 mb-2" th:text="#{information}">Information</label>
             </div>
             <textarea type="number"
                       class="form-control"
@@ -86,7 +86,7 @@
 
         <div class="form-group mb-3">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="image" class="h3 mb-2">Upload image</label>
+                <label for="image" class="h3 mb-2" th:text="#{upload_image}">Upload image</label>
             </div>
             <input type="file"
                       class="form-control form-control-sm"
@@ -98,7 +98,7 @@
 
 
         <div class="button-holder d-flex justify-content-center">
-            <button type="submit">Add plant</button>
+            <button type="submit" th:text="#{add_plant}">Add plant</button>
         </div>
 
     </form>

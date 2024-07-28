@@ -7,19 +7,17 @@
 <main class="p-5">
 <!--    <div class="container bg-blur rounded mt-5 ">-->
     <div class="welcome">
-        <h1>Welcome to PlantMe App</h1>
+        <h1 th:text="#{index_welcome}">Welcome to PlantMe App</h1>
         <hr class="my-3 bg-white w-50"/>
 
-        <p class="h4">
-            "PlantMe" is an app designed for garden enthusiasts to learn, share experience, and manage their own gardens. It offers a user-friendly platform where users can browse through different edible plants, view details about each plant
-        and create their own plant history.</p>
+        <p class="h4" th:text="#{index_description}"></p>
         <hr class="my-3 bg-white w-75"/>
 
         <h3>
-            <a class="primary-text" th:href="@{/users/login}">Login</a>
-            if you have an account or
-            <a class="primary-text" th:href="@{/users/register}">Register</a>
-            now and check our plants.
+            <a class="primary-text" th:href="@{/users/login}" th:text="#{nav_bar_login}">Login</a>
+            <span th:text="#{index_login_if}">if you have an account or</span>
+            <a class="primary-text" th:href="@{/users/register}" th:text="#{nav_bar_register}">Register</a>
+            <span th:text="#{index_register_now}">now and check our plants.</span>
         </h3>
     </div>
 </main>

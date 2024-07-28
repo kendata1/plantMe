@@ -12,9 +12,9 @@
           th:object="${plantFamilyDTO}">
 
         <div class="form-group">
-            <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Plant Family</span></h1>
+            <h1 class="text-center mt-3 mb-5"><span class="badge badge-pill badge-dark" th:text="#{add_plant_family}">Add Plant Family</span></h1>
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="name" class="h3 mb-2">Plant family name</label>
+                <label th:for="name" class="h3 mb-2" th:text="#{plant_family_name}">Plant family name</label>
             </div>
             <input  th:field="*{name}"
                     type="text"
@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="alias" class="h3 mb-2">Plant family alias</label>
+                <label th:for="alias" class="h3 mb-2" th:text="#{plant_family_alias}">Plant family alias</label>
             </div>
             <input  th:field="*{alias}"
                     type="text"
@@ -35,7 +35,7 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="description" class="h3 mb-2">Description</label>
+                <label th:for="description" class="h3 mb-2" th:text="#{description}">Description</label>
             </div>
             <textarea type="number"
                       class="form-control"
@@ -48,7 +48,7 @@
 
         <div class="form-group mb-3">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="image" class="h3 mb-2">Upload image</label>
+                <label for="image" class="h3 mb-2" th:text="#{upload_image}">Upload image</label>
             </div>
             <input type="file"
                    class="form-control form-control-sm"
@@ -60,7 +60,7 @@
 
 
         <div class="button-holder d-flex justify-content-center">
-            <button type="submit">Add plant family</button>
+            <button type="submit" th:text="#{add_plant_family}">Add plant family</button>
         </div>
 
     </form>

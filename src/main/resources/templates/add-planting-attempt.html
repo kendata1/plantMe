@@ -12,7 +12,8 @@
           th:object="${plantingAttemptDTO}">
 
         <div class="form-group">
-            <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark mb-3">Add Attempt</span></h1>
+            <h1 class="text-center mt-3 mb-5"><span class="badge badge-pill badge-dark mb-3" th:text="#{add_attempt}">Add Attempt</span></h1>
+            <label th:for="plant" class="h3 mb-2" th:text="#{plant_name}">Plant name</label>
             <select id="plant" class="form-control" name="plant">
                 <option value="">- Select plant -</option>
                 <option th:field="*{plant}"
@@ -28,7 +29,7 @@
         <div class="form-group">
 
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="variety" class="h3 mb-2">Variety</label>
+                <label th:for="variety" class="h3 mb-2" th:text="#{variety}">Variety</label>
             </div>
             <input  th:field="*{variety}"
                     type="text"
@@ -39,7 +40,7 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="plantingDate" class="h3 mb-2">Planting date</label>
+                <label th:for="plantingDate" class="h3 mb-2" th:text="#{planting_date}">Planting date</label>
             </div>
             <input  type="date"
                     class="form-control"
@@ -49,7 +50,7 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="seedInfo" class="h3 mb-2">Seed info</label>
+                <label for="seedInfo" class="h3 mb-2" th:text="#{seed_info}">Seed info</label>
             </div>
             <textarea class="form-control"
                       id="seedInfo"
@@ -60,7 +61,7 @@
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label for="seedlingInfo" class="h3 mb-2">Seedling info</label>
+                <label for="seedlingInfo" class="h3 mb-2" th:text="#{seedling_info}">Seedling info</label>
             </div>
             <textarea class="form-control"
                       id="seedlingInfo"
@@ -71,7 +72,7 @@
 
 
         <div class="button-holder d-flex justify-content-center">
-            <button type="submit">Add plant</button>
+            <button type="submit" th:text="#{add_attempt}">Add attempt</button>
         </div>
 
     </form>
