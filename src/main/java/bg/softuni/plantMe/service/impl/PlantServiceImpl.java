@@ -26,10 +26,12 @@ public class PlantServiceImpl implements PlantService {
         this.plantRepository = plantRepository;
         this.modelMapper = modelMapper;
     }
+
     @Override
     public List<String> getPlantFamilyNames() {
         return plantFamilyRepository.findAll().stream().map(PlantFamily::getName).collect(Collectors.toList());
     }
+
     @Override
     public void addPlant(AddPlantDTO addPlantDTO, String fileName) {
         Plant plant = modelMapper.map(addPlantDTO, Plant.class);
@@ -49,19 +51,38 @@ public class PlantServiceImpl implements PlantService {
     }
 
     @Override
+    public List<PlantShortInfoDTO> getPlantsShortInfoByPlantFamilyName(String plantFamilyName) {
+        Optional<PlantFamily> findByName = plantFamilyRepository.findByName(plantFamilyName);
+        if (findByName.isPresent()) {
+            return plantRepository.findPlantsByPlantFamily(findByName.get())
+                    .stream()
+                    .map(plant -> modelMapper.map(plant, PlantShortInfoDTO.class))
+                    .collect(Collectors.toList());
+        }
+        throw new RuntimeException("Plant Family does not exists!");
+    }
+
+    @Override
     public PlantFullInfoDTO showPlantDetails(Long id) {
         Optional<Plant> optionalPlant = plantRepository.findById(id);
 
-        if(optionalPlant.isPresent()) {
+        if (optionalPlant.isPresent()) {
             PlantFullInfoDTO mapped = modelMapper.map(optionalPlant, PlantFullInfoDTO.class);
             mapped.setPlantFamily(optionalPlant.get().getPlantFamily());
             return mapped;
         }
-        throw new RuntimeException("Optional plant with id " + id +" not found!");
+        throw new RuntimeException("Optional plant with id " + id + " not found!");
     }
 
     @Override
     public List<String> getAllPlantNames() {
-       return plantRepository.findAll().stream().map(Plant::getName).collect(Collectors.toList());
+        return plantRepository.findAll().stream().map(Plant::getName).collect(Collectors.toList());
+    }
+
+    @Override
+    public String getImageUrlByPlantName(String plantName) {
+        return plantRepository.findByName(plantName)
+                .orElseThrow(() -> new RuntimeException("Plant not found!"))
+                .getImageUrl();
     }
 }

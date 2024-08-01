@@ -1,6 +1,6 @@
 package bg.softuni.plantMe.repository;
 
-import bg.softuni.plantMe.models.UserRole;
+import bg.softuni.plantMe.models.user.UserRole;
 import bg.softuni.plantMe.models.enums.UserRoleEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

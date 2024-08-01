@@ -1,6 +1,6 @@
 package bg.softuni.plantMe.repository;
 
-import bg.softuni.plantMe.models.UserEntity;
+import bg.softuni.plantMe.models.user.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

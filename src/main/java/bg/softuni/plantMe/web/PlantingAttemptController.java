@@ -7,11 +7,9 @@ import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -40,10 +38,6 @@ public class PlantingAttemptController {
         return "add-planting-attempt";
     }
 
-    @GetMapping("/all")
-    public String getAllAttemptsForUser () {
-        return null;
-    }
     @PostMapping("add")
     public String addPlantAttempt (@Valid PlantingAttemptDTO plantingAttemptDTO,
                                    @AuthenticationPrincipal UserDetails userDetails,
@@ -53,10 +47,27 @@ public class PlantingAttemptController {
         if(bindingResult.hasErrors()){
             rAtt.addFlashAttribute("addOfferDTO", plantingAttemptDTO);
             rAtt.addFlashAttribute("org.springframework.validation.BindingResult.PlantingAttemptDTO", bindingResult);
-            return "redirect:/";
+            return "redirect:/attempts/add";
         }
         plantingAttemptDTO.setUsername(userDetails.getUsername());
         plantingAttemptService.addPlantingAttempt(plantingAttemptDTO);
-        return "redirect:/login";
+        return "redirect:/home";
     }
+
+    @GetMapping("/all/{username}")
+    public String getAllAttemptsForUser (@PathVariable("username") String username, Model model) {
+        model.addAttribute("plantAttemptsForUser", plantingAttemptService.getAllPlantingAttemptsShortForUser(username));
+
+        return "user-planting-attempts";
+    }
+
+    @GetMapping("/{id}")
+    public String getAttemptDetails (@PathVariable("id") Long id, Model model) {
+        PlantingAttemptDTO attemptById = plantingAttemptService.getPlantingAttemptById(id);
+        model.addAttribute("currentAttempt", attemptById);
+        model.addAttribute("forImg", plantingAttemptService.mapToShortInfo(attemptById));
+
+        return "planting-attempt-details";
+    }
+
 }

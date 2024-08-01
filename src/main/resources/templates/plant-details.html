@@ -4,29 +4,42 @@
 <head th:replace="fragments/commons::head"></head>
 <body>
 <header th:replace="fragments/commons::nav"></header>
-<main class="m-5" style="background-color: rgb(84 91 98 / 40%); backdrop-filter: blur(35px)";>
+<main class="m-5">
 
     <h1 class="primary-text text-center m-3 p-3" th:text="${plantDetails.name}">Plant name</h1>
     <hr class="my-3 bg-white w-50"/>
-    <div class="row justify-content-between p-4 primary-text" >
-        <div class="col-6">
+    <div class="row plant-container justify-content-between primary-text mt-5 p-4">
+
+        <div class="col-4">
             <img style="border-radius: 6px" th:src="${plantDetails.imageUrl}" class="img-fluid" alt="Plant image">
-
-
-            <h5 class="m-4" th:text="'Plant family: ' + ${plantDetails.getPlantFamily().name} +
-            ' (' + ${plantDetails.getPlantFamily().alias} + ')'"></h5>
-
-                <img style="border-radius: 6px" class="img-fluid" th:src="${plantDetails.getPlantFamily().imageUrl}" alt="Plant Family Img">
-
-            <div class="container">
-
+            <div class="mt-3">
+                <p th:text="'Sun requirements: ' + ${plantDetails.sunRequirements.label}"></p>
+                <p th:text="'Spacing: ' + ${plantDetails.minSpacing} + '- ' + ${plantDetails.maxSpacing} + 'cm'"></p>
             </div>
         </div>
-        <div class="col-4">
-            <h3>Plant information</h3>
-            <p th:text="${plantDetails.information}"></p>
-            <p th:text="'Sun requirements: ' + ${plantDetails.sunRequirements.label}"></p>
-            <p th:text="'Spacing: ' + ${plantDetails.minSpacing} + '- ' + ${plantDetails.maxSpacing} + 'cm'"></p>
+
+        <div class="col-8" style="overflow-y: auto; scrollbar-color: rgb(84 91 98 / 40%) rgb(84 91 98 / 10%)">
+            <p th:text="${plantDetails.information}" style="max-height: 350px"></p>
+        </div>
+    </div>
+
+    <h3 class="m-4 white-blue-text text-center" th:text="${plantDetails.getPlantFamily().name} +
+            ' (' + ${plantDetails.getPlantFamily().alias} + ')'"></h3>
+
+    <div class="row plant-container justify-content-between primary-text mt-3">
+        <div class="col-12">
+            <div class="d-flex">
+                <a class="card m-2" style="width: 200px; max-height: 200px; background-color: darkslategray;"
+                   th:each="plant : ${PlantFamilyMembers}"
+                   th:href="@{/plants/{id}(id=${plant.id})}">
+                    <div class="h-75" style="object-fit: scale-down; overflow: hidden">
+                        <img style="height: 100%" th:src="${plant.imageUrl}" alt="Plant image">
+                    </div>
+                    <div class="card-footer h-25">
+                        <h5 class="card-title " th:text="${plant.name}">Card title</h5>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 

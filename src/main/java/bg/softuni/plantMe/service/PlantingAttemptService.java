@@ -1,6 +1,7 @@
 package bg.softuni.plantMe.service;
 
 import bg.softuni.plantMe.models.DTOs.PlantingAttemptDTO;
+import bg.softuni.plantMe.models.DTOs.PlantingAttemptShortDTO;
 
 import java.util.List;
 
@@ -8,8 +9,11 @@ public interface PlantingAttemptService {
     void addPlantingAttempt (PlantingAttemptDTO addPlantingAttemptDTO);
 
     List<PlantingAttemptDTO> getAllPlantingAttemptsForUser (String username);
+    List<PlantingAttemptShortDTO> getAllPlantingAttemptsShortForUser(String username);
 
-    void deleteOffer(Long offerId);
+    void deleteAttempt(Long id);
 
     PlantingAttemptDTO getPlantingAttemptById(Long id);
+
+    PlantingAttemptShortDTO mapToShortInfo (PlantingAttemptDTO plantingAttemptDTO);
 }

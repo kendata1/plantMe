@@ -1,11 +1,10 @@
-package bg.softuni.plantMe.models;
+package bg.softuni.plantMe.models.user;
 
+import bg.softuni.plantMe.models.base.BaseEntity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -26,11 +25,9 @@ public class UserEntity extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<UserRole> userRoles;
-    @OneToMany (mappedBy = "userEntity")
-    private Set<PlantingAttempt> plantingAttempts;
+
 
     public UserEntity() {
-        this.plantingAttempts = new HashSet<>();
         this.userRoles = new ArrayList<>();
     }
 

@@ -1,5 +1,6 @@
 package bg.softuni.plantMe.models;
 
+import bg.softuni.plantMe.models.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -7,7 +8,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 @Entity
 @Table(name = "current_weather")
-public class CurrentWeather extends BaseEntity{
+public class CurrentWeather extends BaseEntity {
     @Column(nullable = false)
     private LocalDateTime time;
     @Column(nullable = false)

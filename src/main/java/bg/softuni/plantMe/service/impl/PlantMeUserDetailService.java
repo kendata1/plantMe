@@ -1,7 +1,7 @@
 package bg.softuni.plantMe.service.impl;
 
-import bg.softuni.plantMe.models.UserEntity;
-import bg.softuni.plantMe.models.UserRole;
+import bg.softuni.plantMe.models.user.UserEntity;
+import bg.softuni.plantMe.models.user.UserRole;
 import bg.softuni.plantMe.models.enums.UserRoleEnum;
 import bg.softuni.plantMe.models.user.PlantMeUserDetails;
 import bg.softuni.plantMe.repository.UserRepository;

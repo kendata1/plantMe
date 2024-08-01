@@ -1,4 +1,4 @@
-package bg.softuni.plantMe.models;
+package bg.softuni.plantMe.models.user;
 
 import bg.softuni.plantMe.models.enums.UserRoleEnum;
 import jakarta.persistence.*;

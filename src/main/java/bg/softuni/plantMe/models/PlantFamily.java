@@ -1,5 +1,6 @@
 package bg.softuni.plantMe.models;
 
+import bg.softuni.plantMe.models.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

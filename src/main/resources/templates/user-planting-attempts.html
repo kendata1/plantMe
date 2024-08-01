@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<main class="p-5">
+
+    <h1 class="primary-text text-center pb-4" th:text="#{planting_attempts}">Plant Families</h1>
+    <hr class="my-3 bg-white w-75"/>
+
+    <div class="d-flex flex-wrap">
+
+        <a th:href="@{/attempts/{id}(id=${plantingAttempt.id})}" th:each="plantingAttempt : ${plantAttemptsForUser}"
+           class="plant-container text-center mt-5 mb-5 " style="max-width: 480px; max-height: 220px">
+            <div class="col-5 p-0" style="max-height: 200px; overflow: hidden">
+                <img style="border-radius: 6px; object-fit: cover"
+                     th:src="${plantingAttempt.imageUrl}"
+                     alt="Plant image"
+                     class="img-fluid"
+                >
+            </div>
+
+            <div class="text-center col-7 d-flex justify-content-center align-items-center">
+                <div style="vertical-align: center">
+                    <h5 class="primary-text pt-2 pb-0"
+                        th:text="${plantingAttempt.plant} + '(' + ${plantingAttempt.variety} + ')'"></h5>
+                    <p class="primary-text mb-4"
+                       th:text=" #{planting_date} + ':' + ' ' + ${plantingAttempt.plantingDate}"></p>
+                </div>
+            </div>
+
+        </a>
+
+    </div>
+</main>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

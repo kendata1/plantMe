@@ -1,4 +1,4 @@
-package bg.softuni.plantMe.models;
+package bg.softuni.plantMe.models.base;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

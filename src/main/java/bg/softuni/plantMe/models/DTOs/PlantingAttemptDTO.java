@@ -1,15 +1,35 @@
 package bg.softuni.plantMe.models.DTOs;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class PlantingAttemptDTO {
     private String id;
+    @NotBlank
     private String plant;
+    @NotBlank
     private String username;
+    @NotBlank
+    @Size(max = 30)
     private String variety;
+    @NotBlank
     private String plantingDate;
+    @Size(max = 80)
     private String seedInfo;
+    @Size(max = 80)
     private String seedlingInfo;
+    @Size(min = 20 , max = 1200)
+    private String mainInfo;
 
     public PlantingAttemptDTO() {}
+
+    public String getMainInfo() {
+        return mainInfo;
+    }
+
+    public void setMainInfo(String mainInfo) {
+        this.mainInfo = mainInfo;
+    }
 
     public String getId() {
         return id;

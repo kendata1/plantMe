@@ -1,5 +1,6 @@
 package bg.softuni.plantMe.models;
 
+import bg.softuni.plantMe.models.base.BaseEntity;
 import bg.softuni.plantMe.models.enums.SunRequirements;
 import jakarta.persistence.*;
 
@@ -37,7 +38,6 @@ public class Plant extends BaseEntity {
                 ", information='" + information + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", companionPlants=" + companionPlants +
-                ", plantingAttempts=" + plantingAttempts +
                 '}';
     }
 
@@ -46,11 +46,9 @@ public class Plant extends BaseEntity {
     joinColumns = @JoinColumn(name = "plant_id"),
     inverseJoinColumns = @JoinColumn(name = "companion_id"))
     private Set<Plant> companionPlants;
-    @OneToMany (mappedBy = "plant")
-    private Set<PlantingAttempt> plantingAttempts;
+
     public Plant () {
         this.companionPlants = new HashSet<>();
-        this.plantingAttempts = new HashSet<>();
     }
 
     public String getName() {
