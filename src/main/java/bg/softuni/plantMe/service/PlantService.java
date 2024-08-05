@@ -21,4 +21,6 @@ public interface PlantService {
     List<String> getAllPlantNames();
 
     String getImageUrlByPlantName (String plantName);
+
+    void deletePlant(Long id);
 }

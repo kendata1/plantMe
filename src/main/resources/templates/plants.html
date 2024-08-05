@@ -8,9 +8,9 @@
     <h1 class="primary-text text-center m-3 p-4" th:text="#{browse_plants}">Browse Plants</h1>
     <hr class="my-3 bg-white w-75"/>
     <div class="p-4 mt-5 text-center justify-content-center plant-container" id="homePlantContainer">
-        <a class="card m-2" style="max-width: 15%; max-height: 200px; background-color: darkslategray;" th:each="plant : ${allPlants}"
+        <a class="card m-2" style="width: 200px; height: 200px; background-color: darkslategray;" th:each="plant : ${allPlants}"
            th:href="@{/plants/{id}(id=${plant.id})}">
-            <div class="h-75" style="object-fit: scale-down; overflow: hidden">
+            <div class="h-75" style="object-fit: scale-down; overflow: hidden; " >
                 <img style="height: 100%" th:src="${plant.imageUrl}" alt="Plant image">
             </div>
             <div class="card-footer h-25">

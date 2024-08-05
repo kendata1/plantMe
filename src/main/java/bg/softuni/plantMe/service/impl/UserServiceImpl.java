@@ -1,12 +1,15 @@
 package bg.softuni.plantMe.service.impl;
 
 import bg.softuni.plantMe.models.DTOs.UserRegisterDTO;
+import bg.softuni.plantMe.models.user.PlantMeUserDetails;
 import bg.softuni.plantMe.models.user.UserEntity;
 import bg.softuni.plantMe.models.enums.UserRoleEnum;
 import bg.softuni.plantMe.repository.UserRepository;
 import bg.softuni.plantMe.repository.UserRoleRepository;
 import bg.softuni.plantMe.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +36,19 @@ public class UserServiceImpl implements UserService {
             user.getUserRoles().add(userRoleRepository.findByUserRole(UserRoleEnum.ADMIN).orElseThrow());
         }
         userRepository.save(user);
+    }
+
+    public UserEntity findByUsername (String username) {
+       return userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found!"));
+    }
+
+    public PlantMeUserDetails getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getPrincipal())) {
+
+            return (PlantMeUserDetails) auth.getPrincipal();
+
+        }
+        return null;
     }
 }

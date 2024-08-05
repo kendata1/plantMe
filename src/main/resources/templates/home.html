@@ -23,7 +23,7 @@
                 <h3 th:text="#{home_plantFamilies}"></h3>
             </div>
         </a>
-        <a th:href="@{/attempts/all/{username}(username = ${#authentication.getName()})}" class="main-btn p-3">
+        <a th:href="@{/attempts/mine}" class="main-btn p-3">
             <div class="box">
                 <img src="/images/core/plantingAttempts.png" height="96" alt="">
                 <h3 th:text="#{home_myPlantingAttempts}">My Planting Attempts</h3>

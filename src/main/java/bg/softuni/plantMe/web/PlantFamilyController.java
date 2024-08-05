@@ -81,5 +81,12 @@ public class PlantFamilyController {
         return "plant-family-details";
     }
 
+    @DeleteMapping("/plant-family/{id}")
+    public String deletePlantFamily (@PathVariable("id") Long id) {
+        plantFamilyService.deleteFamily(id);
+        return "redirect:/plantFamilies";
+    }
+
+
 
 }

@@ -10,10 +10,9 @@ public interface PlantingAttemptService {
 
     List<PlantingAttemptDTO> getAllPlantingAttemptsForUser (String username);
     List<PlantingAttemptShortDTO> getAllPlantingAttemptsShortForUser(String username);
-
+    List<PlantingAttemptDTO> getAllPlantingAttemptsOfOtherUsers(String username);
+    List<PlantingAttemptShortDTO> getAllPlantingAttemptsShortOfOtherUsers(String username);
     void deleteAttempt(Long id);
-
     PlantingAttemptDTO getPlantingAttemptById(Long id);
-
     PlantingAttemptShortDTO mapToShortInfo (PlantingAttemptDTO plantingAttemptDTO);
 }

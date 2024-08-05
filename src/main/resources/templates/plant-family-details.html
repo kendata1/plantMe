@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/commons::head"></head>
 <body>
 <header th:replace="fragments/commons::nav"></header>
 <main>
     <h1 class="primary-text text-center m-3 p-4" th:text="${plantFamilyDetails.name} +
     ' (' + ${plantFamilyDetails.alias} + ')'">Browse Plants</h1>
-    <div class="d-flex p-5 mt-4 plant-container primary-text">
-        <div class="w-75 pr-3">
+    <div class="d-flex flex-wrap m-5 mt-0 pt-4 pb-4 plant-container primary-text">
+        <div class="col-6">
             <img style="border-radius: 6px"
                  th:src="${plantFamilyDetails.imageUrl}"
                  class="img-fluid" alt="Plant image">
         </div>
 
-        <div class="w-25">
+        <div class="col-6">
             <p th:text="${plantFamilyDetails.description}"></p>
+
+            <form th:action="@{/plant-family/{id}(id = ${plantFamilyDetails.id})}"
+                  th:method="DELETE"
+                  sec:authorize="hasRole('ROLE_ADMIN')">
+                <button class="btn btn-danger mt-3 "  type="submit" th:text="#{delete}"></button>
+            </form>
         </div>
+
 
     </div>
 

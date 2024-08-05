@@ -9,4 +9,5 @@ public interface PlantFamilyService {
     public void addPlantFamily (PlantFamilyDTO plantFamilyDTO, String fileName);
     public List<PlantFamilyDTO> findAllPlantFamilies ();
     public PlantFamilyDTO getPlantFamilyById (Long id);
+    void deleteFamily(Long id);
 }

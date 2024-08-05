@@ -120,7 +120,7 @@ public CurrentWeather map(CurrentWeatherDTO currentWeatherDTO) {
     CurrentWeather currentWeather = modelMapper.map(currentWeatherDTO, CurrentWeather.class);
 
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-    currentWeather.setTime(LocalDateTime.parse(fetchCurrentWeather().getTime(), dateTimeFormatter));
+    currentWeather.setTime(LocalDateTime.parse(currentWeatherDTO.getTime(), dateTimeFormatter));
 
     return currentWeather;
 }

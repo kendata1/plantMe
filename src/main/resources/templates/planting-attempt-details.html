@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/commons::head"></head>
 <body>
 <header th:replace="fragments/commons::nav"></header>
@@ -16,6 +17,11 @@
                 <p th:text=" #{planting_date} +' '+ ${currentAttempt.plantingDate}"></p>
                 <p th:if="${currentAttempt.seedInfo != ''}" th:text="#{seed_info} + ': ' + ${currentAttempt.seedInfo}"></p>
                 <p th:if="${currentAttempt.seedlingInfo != ''}" th:text="#{seedling_info} + ': ' + ${currentAttempt.seedlingInfo}"></p>
+                <form th:action="@{/attempts/{username}/{id}(id = ${currentAttempt.id}, username = ${currentAttempt.username})}"
+                      th:method="DELETE"
+                      th:if="${user.username} == ${currentAttempt.username} or ${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <button class="btn btn-danger mt-3 "  type="submit" th:text="#{delete}"></button>
+                </form>
             </div>
         </div>
 
@@ -26,23 +32,37 @@
 
     <h3 class="m-4 white-blue-text text-center" th:text="#{comments}"></h3>
 
-    <div class="row plant-container justify-content-between primary-text mt-3">
-        <form class="w-100 p-4" th:action="@{/add-comment}"
+    <div class="row plant-container justify-content-between primary-text mt-3 p-4">
+
+        <div class="d-flex flex-wrap w-100 text-left"
+             th:each="comment: ${comments}">
+            <h5 class="col-6" style="float: left" th:text="${comment.owner.firstName} + ' ' + ${comment.owner.lastName}"></h5>
+            <p class="col-6 text-right" th:text="${comment.datePublished}"></p>
+            <p class="col-11 " th:text="${comment.text}"></p>
+
+            <form th:action="@{/comments/{username}/{id}(username = ${comment.owner.username}, id = ${comment.id})}"
+                  th:method="DELETE"
+                  th:if="${user.username} == ${comment.owner.getUsername()} or ${#authorization.expression('hasRole(''ADMIN'')')}">
+                <button class="btn btn-danger mt-3 "  type="submit" th:text="#{delete}"></button>
+            </form>
+            <hr class="my-3 bg-white w-100"/>
+        </div>
+
+        <form class="w-100 mt-4" th:action="@{/attempts/{id}/add-comment(id = ${currentAttempt.id})}"
               th:method="POST">
 
-            <label class="h3" th:for="comment" th:text="#{leave_comment}"></label>
+            <label class="h3" th:for="text" th:text="#{leave_comment}"></label>
             <textarea
                     class="form-control"
                     placeholder="Place your comment here ..."
-                    id="comment"
-                    name="comment"
+                    id="text"
+                    name="text"
                     rows="6"
                     cols="2"></textarea>
 
             <button class="btn btn-secondary mt-3" style="float: right" type="submit" th:text="#{post_comment}"></button>
-
-
         </form>
+
     </div>
 
 </main>

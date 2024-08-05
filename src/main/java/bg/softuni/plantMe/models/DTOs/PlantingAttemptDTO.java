@@ -7,16 +7,15 @@ public class PlantingAttemptDTO {
     private String id;
     @NotBlank
     private String plant;
-    @NotBlank
     private String username;
     @NotBlank
     @Size(max = 30)
     private String variety;
     @NotBlank
     private String plantingDate;
-    @Size(max = 80)
+    @Size(max = 255)
     private String seedInfo;
-    @Size(max = 80)
+    @Size(max = 255)
     private String seedlingInfo;
     @Size(min = 20 , max = 1200)
     private String mainInfo;

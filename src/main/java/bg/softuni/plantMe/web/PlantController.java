@@ -6,11 +6,9 @@ import bg.softuni.plantMe.models.DTOs.PlantShortInfoDTO;
 import bg.softuni.plantMe.service.PlantService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.util.List;
 
 @Controller
@@ -36,6 +34,13 @@ public class PlantController {
         model.addAttribute("plantDetails", plantFullInfoDTO);
         model.addAttribute("PlantFamilyMembers", plantsShortInfoByPlantFamily);
         return "plant-details";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deletePlant (@PathVariable("id") Long id) {
+
+        plantService.deletePlant(id);
+        return "redirect:/plants";
     }
 }
 

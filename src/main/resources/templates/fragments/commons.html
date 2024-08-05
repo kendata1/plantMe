@@ -28,6 +28,7 @@
                     </ul>
             </div>
             <a sec:authorize="isAuthenticated()" th:href="@{/attempts/add}" th:text="#{nav_bar_add_attempt}">Add Attempt</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/attempts/others}" th:text="#{nav_bar_browse_attempts}">Browse Attempts</a>
 
         </div>
         <div class="links">

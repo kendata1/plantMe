@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -53,6 +54,17 @@ public class PlantingAttemptServiceImpl implements PlantingAttemptService {
     }
 
     @Override
+    public List<PlantingAttemptDTO> getAllPlantingAttemptsOfOtherUsers(String username) {
+        LOGGER.info("Get all Attempts by username");
+        return attemptsRestClient
+                .get()
+                .uri("http://localhost:8081/attempts/isnt/{username}", username)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(new ParameterizedTypeReference<>() {});
+    }
+
+    @Override
     public void deleteAttempt(Long id) {
         attemptsRestClient
                 .delete()
@@ -73,6 +85,14 @@ public class PlantingAttemptServiceImpl implements PlantingAttemptService {
     @Override
     public List<PlantingAttemptShortDTO> getAllPlantingAttemptsShortForUser(String username) {
         return this.getAllPlantingAttemptsForUser(username)
+                .stream()
+                .map(this::mapToShortInfo)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PlantingAttemptShortDTO> getAllPlantingAttemptsShortOfOtherUsers(String username) {
+        return this.getAllPlantingAttemptsOfOtherUsers(username)
                 .stream()
                 .map(this::mapToShortInfo)
                 .collect(Collectors.toList());
