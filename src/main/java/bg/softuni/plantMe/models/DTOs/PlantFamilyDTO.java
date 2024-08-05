@@ -1,10 +1,19 @@
 package bg.softuni.plantMe.models.DTOs;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class PlantFamilyDTO {
     private Long id;
+    @NotBlank(message = "{not.blank.err}")
+    @Size(max = 35, message = "{short.string.max.length.err}")
     private String name;
+    @NotBlank(message = "{not.blank.err}")
+    @Size(max = 35, message = "{short.string.max.length.err}")
     private String alias;
-    private String description;
+    @NotBlank(message = "{not.blank.err}")
+    @Size(max = 4000, message = "{information.max.length}")
+    private String information;
     private String imageUrl;
 
     public PlantFamilyDTO() {}
@@ -33,12 +42,12 @@ public class PlantFamilyDTO {
         this.alias = alias;
     }
 
-    public String getDescription() {
-        return description;
+    public String getInformation() {
+        return information;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setInformation(String information) {
+        this.information = information;
     }
 
     public String getImageUrl() {

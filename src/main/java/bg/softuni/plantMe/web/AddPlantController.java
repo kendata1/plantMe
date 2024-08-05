@@ -33,18 +33,21 @@ public class AddPlantController {
     public AddPlantDTO addPlantDTO() {
         return new AddPlantDTO();
     }
+
     @GetMapping("/add-plant")
-    public String viewAddPlant (Model model) {
-        model.addAttribute("plantNames",plantService.getPlantFamilyNames());
+    public String viewAddPlant(Model model) {
+        model.addAttribute("plantFamilyNames", plantService.getPlantFamilyNames());
         model.addAttribute("sunRequirements", SunRequirements.values());
 
         return "add-plant";
     }
+
     @PostMapping("/add-plant")
-    public String addPlant (@Valid AddPlantDTO addPlantDTO,
-                            @RequestParam("image") MultipartFile file,
-                            BindingResult bindingResult,
-                            RedirectAttributes redirectAttributes) throws IOException {
+    public String addPlant(
+                        @RequestParam("image") MultipartFile file,
+                        @Valid AddPlantDTO addPlantDTO,
+                        BindingResult bindingResult,
+                        RedirectAttributes redirectAttributes) throws IOException {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addPlantDTO", addPlantDTO);
@@ -53,7 +56,7 @@ public class AddPlantController {
         }
 
         Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
-        Files.write(fileNameAndPath,file.getBytes());
+        Files.write(fileNameAndPath, file.getBytes());
 
         plantService.addPlant(addPlantDTO, file.getOriginalFilename());
 

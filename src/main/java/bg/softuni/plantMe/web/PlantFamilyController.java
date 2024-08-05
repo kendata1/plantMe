@@ -32,47 +32,49 @@ public class PlantFamilyController {
 
         this.plantService = plantService;
     }
+
     @ModelAttribute("plantFamilyDTO")
     public PlantFamilyDTO plantFamilyDTO() {
         return new PlantFamilyDTO();
     }
 
     @ModelAttribute("allPlantFamilies")
-    public List<PlantFamilyDTO> allPlantFamilyDTOs () {
+    public List<PlantFamilyDTO> allPlantFamilyDTOs() {
         return plantFamilyService.findAllPlantFamilies();
     }
 
     @GetMapping("/add-plant-family")
-    public String viewAddPlantFamily () {
+    public String viewAddPlantFamily() {
         return "add-plant-family";
     }
 
     @PostMapping("add-plant-family")
-    public String addPlantFamily (@Valid PlantFamilyDTO addPlantFamilyDTO,
-                                  @RequestParam("image") MultipartFile file,
-                                  BindingResult bindingResult,
-                                  RedirectAttributes redirectAttributes) throws IOException {
+    public String addPlantFamily(@RequestParam("image") MultipartFile file,
+                                 @Valid PlantFamilyDTO plantFamilyDTO,
+                                 BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes) throws IOException {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("addPlantFamilyDTO", addPlantFamilyDTO);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addPlantFamilyDTO", bindingResult);
+            redirectAttributes.addFlashAttribute("plantFamilyDTO", plantFamilyDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.plantFamilyDTO", bindingResult);
             return "redirect:/add-plant-family";
         }
 
         Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
-        Files.write(fileNameAndPath,file.getBytes());
+        Files.write(fileNameAndPath, file.getBytes());
 
-        plantFamilyService.addPlantFamily(addPlantFamilyDTO, file.getOriginalFilename());
+        plantFamilyService.addPlantFamily(plantFamilyDTO, file.getOriginalFilename());
 
         return "redirect:/home";
     }
 
     @GetMapping("/plantFamilies")
-    public String allPlantFamiliesView () {
+    public String allPlantFamiliesView() {
         return "plant-families";
     }
+
     @GetMapping("/plant-family/{id}")
-    public String plantFamilyDetailsView (@PathVariable("id") Long id, Model model) {
+    public String plantFamilyDetailsView(@PathVariable("id") Long id, Model model) {
         PlantFamilyDTO plantFamilyById = plantFamilyService.getPlantFamilyById(id);
         List<PlantShortInfoDTO> plantsShortInfoByPlantFamilyName = plantService.getPlantsShortInfoByPlantFamilyName(plantFamilyById.getName());
 
@@ -82,11 +84,10 @@ public class PlantFamilyController {
     }
 
     @DeleteMapping("/plant-family/{id}")
-    public String deletePlantFamily (@PathVariable("id") Long id) {
+    public String deletePlantFamily(@PathVariable("id") Long id) {
         plantFamilyService.deleteFamily(id);
         return "redirect:/plantFamilies";
     }
-
 
 
 }

@@ -12,36 +12,41 @@
           th:object="${addPlantDTO}">
 
         <div class="form-group">
-            <h1 class="text-center mt-3 mb-4"><span class="badge badge-pill badge-dark" th:text="#{add_plant}">Add Plant</span></h1>
+            <h1 class="text-center mt-3 mb-4"><span class="badge badge-pill badge-dark"
+                                                    th:text="#{add_plant}">Add Plant</span></h1>
             <div class="label-holder text-white d-flex justify-content-center">
                 <label th:for="plantName" class="h3 mb-2" th:text="#{plant_name}">Plant name</label>
             </div>
-            <input  th:field="*{name}"
-                    type="text"
-                    class="form-control"
-                    id="plantName"
-                    name="plantName"/>
+            <input th:field="*{name}"
+                   type="text"
+                   required
+                   th:errorclass="is-invalid"
+                   class="form-control"
+                   id="plantName"
+                   name="plantName"/>
+            <small th:each="err : ${#fields.errors('plantName')}" th:text="${err}" class="text-danger"></small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
                 <label th:for="plantFamily" class="h3 mb-2" th:text="#{plant_family}">Plant Family</label>
             </div>
-            <select id="plantFamily" class="form-control" name="plantFamily">
+            <select id="plantFamily" class="form-control" name="plantFamily" th:errorclass="is-invalid" required>
                 <option value="">- Select plant family -</option>
-                <option th:each="name: ${plantNames}"
-                        th:value="${name}"
-                        th:text="${name}">
+                <option th:each="familyName: ${plantFamilyNames}"
+                        th:value="${familyName}"
+                        th:text="${familyName}">
                     IMAGINARY NAME
                 </option>
             </select>
+            <small th:each="err : ${#fields.errors('plantFamily')}" th:text="${err}" class="text-danger"></small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
                 <label th:for="sunRequirements" class="h3 mb-2" th:text="#{sun_requirements}">Sun Requirements</label>
             </div>
-            <select id="sunRequirements" class="form-control" name="sunRequirements">
+            <select id="sunRequirements" class="form-control" name="sunRequirements" th:errorclass="is-invalid" required>
                 <option value="">- Select sun requirement -</option>
                 <option th:each="sunReq: ${sunRequirements}"
                         th:value="${sunReq}"
@@ -49,39 +54,51 @@
                     IMAGINARY REQUIREMENTS
                 </option>
             </select>
+            <small th:each="err : ${#fields.errors('sunRequirements')}" th:text="${err}" class="text-danger"></small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
                 <label th:for="minSpacing" class="h3 mb-2" th:text="#{min_spacing}">Min spacing (cm)</label>
             </div>
-            <input  type="number"
-                    class="form-control"
-                    id="minSpacing"
-                    name="minSpacing"/>
+            <input type="number"
+                   class="form-control"
+                   required
+                   max="1000"
+                   th:errorclass="is-invalid"
+                   id="minSpacing"
+                   name="minSpacing"/>
+            <small th:each="err : ${#fields.errors('minSpacing')}" th:text="${err}" class="text-danger"></small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
                 <label th:for="maxSpacing" class="h3 mb-2" th:text="#{max_spacing}">Max spacing (cm)</label>
             </div>
-            <input  type="number"
-                    class="form-control"
-                    id="maxSpacing"
-                    name="maxSpacing"/>
+            <input type="number"
+                   class="form-control"
+                   required
+                   max="1000"
+                   th:errorclass="is-invalid"
+                   id="maxSpacing"
+                   name="maxSpacing"/>
+            <small th:each="err : ${#fields.errors('maxSpacing')}" th:text="${err}" class="text-danger"></small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
                 <label for="information" class="h3 mb-2" th:text="#{information}">Information</label>
             </div>
-            <textarea type="number"
+            <textarea
                       class="form-control"
+                      th:errorclass="is-invalid"
+                      required
+                      maxlength="4000"
                       id="information"
                       name="information"
                       rows="10"
-                      cols="2">
-            </textarea>
+                      cols="2"></textarea>
+            <small th:each="err : ${#fields.errors('information')}" th:text="${err}" class="text-danger"></small>
         </div>
 
         <div class="form-group mb-3">
@@ -89,11 +106,12 @@
                 <label for="image" class="h3 mb-2" th:text="#{upload_image}">Upload image</label>
             </div>
             <input type="file"
-                      class="form-control form-control-sm"
-                      id="image"
-                      name="image"
-                      accept="image/*"
-                      >
+                   class="form-control form-control-sm"
+                   required
+                   id="image"
+                   name="image"
+                   accept="image/*"
+            >
         </div>
 
 

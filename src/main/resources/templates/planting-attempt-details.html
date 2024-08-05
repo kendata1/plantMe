@@ -49,16 +49,22 @@
         </div>
 
         <form class="w-100 mt-4" th:action="@{/attempts/{id}/add-comment(id = ${currentAttempt.id})}"
-              th:method="POST">
+              th:method="POST"
+              th:object="${addCommentDTO}">
 
             <label class="h3" th:for="text" th:text="#{leave_comment}"></label>
             <textarea
                     class="form-control"
                     placeholder="Place your comment here ..."
+                    th:errorclass="is-invalid"
+                    required
+                    minlength="5"
+                    maxlength="1200"
                     id="text"
                     name="text"
                     rows="6"
                     cols="2"></textarea>
+            <small th:errors="*{text}" class="text-danger">Text error</small>
 
             <button class="btn btn-secondary mt-3" style="float: right" type="submit" th:text="#{post_comment}"></button>
         </form>

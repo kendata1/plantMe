@@ -17,33 +17,44 @@
                 <label th:for="name" class="h3 mb-2" th:text="#{plant_family_name}">Plant family name</label>
             </div>
             <input  th:field="*{name}"
+                    required
+                    maxlength="35"
                     type="text"
+                    th:errorclass="is-invalid"
                     class="form-control"
                     id="name"
                     name="name"/>
+            <small th:each="err : ${#fields.errors('name')}" th:text="${err}" class="text-danger"></small>
         </div>
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
                 <label th:for="alias" class="h3 mb-2" th:text="#{plant_family_alias}">Plant family alias</label>
             </div>
             <input  th:field="*{alias}"
+                    required
+                    maxlength="35"
                     type="text"
+                    th:errorclass="is-invalid"
                     class="form-control"
                     id="alias"
                     name="alias"/>
+            <small th:each="err : ${#fields.errors('alias')}" th:text="${err}" class="text-danger"></small>
         </div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="description" class="h3 mb-2" th:text="#{description}">Description</label>
+                <label th:for="information" class="h3 mb-2" th:text="#{description}">Description</label>
             </div>
             <textarea
                       class="form-control"
-                      id="description"
-                      name="description"
+                      id="information"
+                      required
+                      maxlength="4000"
+                      name="information"
+                      th:errorclass="is-invalid"
                       rows="10"
-                      cols="2">
-            </textarea>
+                      cols="2"></textarea>
+            <small th:each="err : ${#fields.errors('information')}" th:text="${err}" class="text-danger"></small>
         </div>
 
         <div class="form-group mb-3">
@@ -51,6 +62,7 @@
                 <label for="image" class="h3 mb-2" th:text="#{upload_image}">Upload image</label>
             </div>
             <input type="file"
+                   required
                    class="form-control form-control-sm"
                    id="image"
                    name="image"

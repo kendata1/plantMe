@@ -6,24 +6,23 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class UserRegisterDTO {
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "{not.blank.err}")
+    @Size(min = 3, max = 20, message = "{register.size.err}")
     String username;
-    @Email
-    @NotBlank
+    @Email(message = "{email.field.err}")
+    @NotBlank(message = "{not.blank.err}")
     String email;
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "{not.blank.err}")
+    @Size(min = 3, max = 20, message = "{register.size.err}")
     String password;
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "{not.blank.err}")
+    @Size(min = 3, max = 20, message = "{register.size.err}")
     String confirmPassword;
-
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "{not.blank.err}")
+    @Size(min = 3, max = 20, message = "{register.size.err}")
     String firstName;
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "{not.blank.err}")
+    @Size(min = 3, max = 20, message = "{register.size.err}")
     String lastName;
 
     public UserRegisterDTO() {}

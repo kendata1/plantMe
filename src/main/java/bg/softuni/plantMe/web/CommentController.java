@@ -26,9 +26,9 @@ public class CommentController {
 
     @PostMapping("attempts/{id}/add-comment")
     public String addComment (@PathVariable("id") Long id, @Valid AddCommentDTO addCommentDTO,
-                              @AuthenticationPrincipal UserDetails userDetails,
                               BindingResult bindingResult,
-                              RedirectAttributes redirectAttributes) {
+                              RedirectAttributes redirectAttributes,
+                              @AuthenticationPrincipal UserDetails userDetails) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addCommentDTO", addCommentDTO);

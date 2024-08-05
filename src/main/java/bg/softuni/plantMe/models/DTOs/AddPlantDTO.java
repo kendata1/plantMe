@@ -1,14 +1,25 @@
 package bg.softuni.plantMe.models.DTOs;
-
-import bg.softuni.plantMe.models.PlantFamily;
 import bg.softuni.plantMe.models.enums.SunRequirements;
+import jakarta.validation.constraints.*;
 
 public class AddPlantDTO {
+    @NotBlank(message = "{not.blank.err}")
+    @Size(max = 35, message = "{short.string.max.length.err}")
     private String name;
+    @NotBlank(message = "{not.blank.err}")
+    @Size(max = 35, message = "{short.string.max.length.err}")
     private String plantFamily;
+    @NotNull(message = "{not.blank.err}")
+    @Size(max = 35, message = "{short.string.max.length.err}")
     private SunRequirements sunRequirements;
+    @Positive(message = "{positive.number.err}")
+    @Max(value = 1000, message = "{spacing.max.value.err}")
     private int minSpacing;
+    @Positive
+    @Max(value = 1000, message = "{spacing.max.value.err}")
     private int maxSpacing;
+    @NotBlank(message = "{not.blank.err}")
+    @Size(max = 4000, message = "{information.max.length}")
     private String information;
 
     public AddPlantDTO () {}

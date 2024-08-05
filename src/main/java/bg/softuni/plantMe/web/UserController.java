@@ -5,6 +5,7 @@ import bg.softuni.plantMe.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,17 +41,22 @@ public class UserController {
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors() || !data.getPassword().equals(data.getConfirmPassword())) {
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userRegisterDTO", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterDTO", bindingResult);
-            return "redirect:/register";
+            return "redirect:/users/register";
         }
 
+        if (!data.getPassword().equals(data.getConfirmPassword())) {
+            ObjectError objectError = new ObjectError("userRegisterDTO", "{password.dont.match}");
+            bindingResult.addError(objectError);
+            return "redirect:/users/register";
+        }
         try {
             userService.register(data);
-            return "redirect:/login";
         } catch (RuntimeException e) {
-            return "redirect:/register";
+            return "redirect:/users/register";
         }
+        return "redirect:/users/login";
     }
 }

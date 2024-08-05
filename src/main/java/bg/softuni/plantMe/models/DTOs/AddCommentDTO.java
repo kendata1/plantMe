@@ -1,15 +1,19 @@
 package bg.softuni.plantMe.models.DTOs;
 
 import bg.softuni.plantMe.models.user.UserEntity;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 public class AddCommentDTO {
         private Long id;
+        @PastOrPresent
         private LocalDateTime datePublished;
-        @Size(min = 5, max = 1200)
+        @Size(message = "{add.comment.text.length.err}", min = 5, max = 1200)
         private String text;
         private UserEntity owner;
+        @Positive
         private Long attemptId;
 
         public AddCommentDTO() {}

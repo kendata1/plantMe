@@ -17,7 +17,7 @@ public class PlantFamily extends BaseEntity {
     @Column(nullable = false)
     private String alias;
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String description;
+    private String information;
     @Column(name = "image_url")
     private String imageUrl;
     @OneToMany(mappedBy = "plantFamily")
@@ -43,12 +43,12 @@ public class PlantFamily extends BaseEntity {
         this.alias = alias;
     }
 
-    public String getDescription() {
-        return description;
+    public String getInformation() {
+        return information;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setInformation(String information) {
+        this.information = information;
     }
 
     public String getImageUrl() {
@@ -72,7 +72,7 @@ public class PlantFamily extends BaseEntity {
         return "PlantFamily{" +
                 "name='" + name + '\'' +
                 ", alias='" + alias + '\'' +
-                ", description='" + description + '\'' +
+                ", description='" + information + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", plants=" + plants +
                 '}';
