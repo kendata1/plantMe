@@ -2,6 +2,7 @@ package bg.softuni.plantMe.web;
 
 import bg.softuni.plantMe.models.DTOs.AddCommentDTO;
 import bg.softuni.plantMe.models.DTOs.PlantingAttemptDTO;
+import bg.softuni.plantMe.models.DTOs.ShowUserDTO;
 import bg.softuni.plantMe.models.user.PlantMeUserDetails;
 import bg.softuni.plantMe.models.user.UserEntity;
 import bg.softuni.plantMe.service.CommentService;
@@ -49,7 +50,7 @@ public class PlantingAttemptController {
         return plantService.getAllPlantNames();
     }
     @ModelAttribute("user")
-    public PlantMeUserDetails getUser() {
+    public ShowUserDTO getUser() {
        return userService.getCurrentUser();
     }
 

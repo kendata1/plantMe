@@ -14,7 +14,7 @@
         <div class="form-group">
             <h1 class="text-center mt-3 mb-4"><span class="badge badge-pill badge-dark mb-3" th:text="#{add_attempt}">Add Attempt</span></h1>
             <label th:for="plant" class="h3 mb-2" th:text="#{plant_name}">Plant name</label>
-            <select id="plant" class="form-control" name="plant">
+            <select id="plant" class="form-control" name="plant" required>
                 <option value="">- Select plant -</option>
                 <option th:field="*{plant}"
                         th:each="name: ${plantNames}"
@@ -33,6 +33,8 @@
             </div>
             <input  th:field="*{variety}"
                     type="text"
+                    required
+                    maxlength="30"
                     class="form-control"
                     id="variety"
                     name="variety"/>

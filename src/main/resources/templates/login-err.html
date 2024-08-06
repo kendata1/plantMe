@@ -4,7 +4,9 @@
 <head th:replace="fragments/commons::head"></head>
 
 <body>
-    <div class="welcome ml-3 mr-3">
+<header th:replace="fragments/commons::nav"></header>
+    <main class="p-4">
+    <div class="welcome">
         <h1 th:text="#{login_err_failed_to_log_in}">Failed to log in our site.</h1>
         <hr class="my-3 bg-white w-50"/>
 
@@ -19,8 +21,9 @@
             <span th:text="#{index_register_now}"></span>
         </h3>
     </div>
+    </main>
     <footer th:replace="fragments/commons::footer"></footer>
 </body>
-
+<footer th:replace="fragments/commons::footer"></footer>
 </html>
 

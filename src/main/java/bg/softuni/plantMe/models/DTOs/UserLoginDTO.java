@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class UserLoginDTO {
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "{not.blank.err}")
+    @Size(min = 3, max = 20, message = "{register.size.err}")
     private String username;
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "{not.blank.err}")
+    @Size(min = 3, max = 20, message = "{register.size.err}")
     private String password;
 
     public UserLoginDTO() {}

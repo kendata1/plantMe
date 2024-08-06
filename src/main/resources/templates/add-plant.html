@@ -15,16 +15,16 @@
             <h1 class="text-center mt-3 mb-4"><span class="badge badge-pill badge-dark"
                                                     th:text="#{add_plant}">Add Plant</span></h1>
             <div class="label-holder text-white d-flex justify-content-center">
-                <label th:for="plantName" class="h3 mb-2" th:text="#{plant_name}">Plant name</label>
+                <label th:for="name" class="h3 mb-2" th:text="#{plant_name}">Plant name</label>
             </div>
             <input th:field="*{name}"
                    type="text"
                    required
                    th:errorclass="is-invalid"
                    class="form-control"
-                   id="plantName"
-                   name="plantName"/>
-            <small th:each="err : ${#fields.errors('plantName')}" th:text="${err}" class="text-danger"></small>
+                   id="name"
+                   name="name"/>
+            <small th:each="err : ${#fields.errors('name')}" th:text="${err}" class="text-danger"></small>
         </div>
 
         <div class="form-group">

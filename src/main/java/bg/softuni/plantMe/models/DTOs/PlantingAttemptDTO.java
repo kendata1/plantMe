@@ -5,19 +5,19 @@ import jakarta.validation.constraints.Size;
 
 public class PlantingAttemptDTO {
     private String id;
-    @NotBlank
+    @NotBlank(message = "{not.blank.err}")
     private String plant;
     private String username;
-    @NotBlank
-    @Size(max = 30)
+    @NotBlank(message = "{not.blank.err}")
+    @Size(max = 35, message = "{short.string.max.length.err}")
     private String variety;
-    @NotBlank
+    @NotBlank(message = "{not.blank.err}")
     private String plantingDate;
-    @Size(max = 255)
+    @Size(max = 255, message = "{medium.string.max.length.err}")
     private String seedInfo;
-    @Size(max = 255)
+    @Size(max = 255, message = "{medium.string.max.length.err}")
     private String seedlingInfo;
-    @Size(min = 20 , max = 1200)
+    @Size(max = 4000, message = "{information.max.length}")
     private String mainInfo;
 
     public PlantingAttemptDTO() {}

@@ -18,6 +18,9 @@
 
             <input th:field="*{username}"
                    th:errorclass="is-invalid"
+                   required
+                   maxlength="20"
+                   minlength="3"
                    type="text" class="form-control" id="username" name="username"/>
             <small th:each="err : ${#fields.errors('username')}" th:text="${err}" class="text-danger"></small>
         </div>
@@ -28,6 +31,9 @@
             </div>
             <input th:field="*{email}"
                    th:errorclass="is-invalid"
+                   required
+                   maxlength="20"
+                   minlength="3"
                    type="email" class="form-control" id="email" name="email"/>
             <small th:each="err : ${#fields.errors('email')}" th:text="${err}" class="text-danger"></small>
         </div>
@@ -38,6 +44,9 @@
             </div>
             <input th:field="*{password}"
                    th:errorclass="is-invalid"
+                   required
+                   maxlength="20"
+                   minlength="3"
                    type="password" class="form-control" id="password" name="password"/>
             <small th:each="err : ${#fields.errors('password')}" th:text="${err}" class="text-danger"></small>
         </div>
@@ -48,6 +57,9 @@
             </div>
             <input th:field="*{confirmPassword}"
                    th:errorclass="is-invalid"
+                   required
+                   maxlength="20"
+                   minlength="3"
                    type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
             <small th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}" class="text-danger"></small>
         </div>
@@ -58,6 +70,9 @@
             </div>
             <input th:field="*{firstName}"
                    th:errorclass="is-invalid"
+                   required
+                   maxlength="20"
+                   minlength="3"
                    type="text" class="form-control" id="firstName" name="firstName"/>
             <small th:each="err : ${#fields.errors('firstName')}" th:text="${err}" class="text-danger"></small>
         </div>
@@ -68,6 +83,9 @@
             </div>
             <input th:field="*{lastName}"
                    th:errorclass="is-invalid"
+                   required
+                   maxlength="20"
+                   minlength="3"
                    type="text" class="form-control" id="lastName" name="lastName"/>
             <small th:each="err : ${#fields.errors('lastName')}" th:text="${err}" class="text-danger"></small>
         </div>

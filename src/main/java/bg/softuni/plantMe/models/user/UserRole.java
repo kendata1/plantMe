@@ -15,6 +15,11 @@ public class UserRole {
 
     public UserRole () {}
 
+    public UserRole(long id, UserRoleEnum userRole) {
+        this.id = id;
+        this.userRole = userRole;
+    }
+
     public long getId() {
         return id;
     }

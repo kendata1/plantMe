@@ -4,6 +4,7 @@ spring:
     url: jdbc:mysql://localhost:3306/plant_me?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
     username: ${DATA_USERNAME}
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   mvc:
     hiddenmethod:
       filter:
@@ -27,6 +28,11 @@ logging:
       SQL: debug
       type:
         descriptor: trace
+
+weather:
+  api:
+    url: "https://api.open-meteo.com/v1/forecast?latitude=42.15&longitude=24.75&current=temperature_2m,is_day,rain,cloud_cover,wind_speed_10m"
+
 attempts:
   api:
-    baseUrl: "${ATTEMPTS_BASE_URL:http//localhost:8081}"
+    baseUrl: "http://localhost:8081/attempts"

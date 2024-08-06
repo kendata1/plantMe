@@ -6,14 +6,15 @@ import jakarta.validation.constraints.Size;
 public class PlantingAttemptShortDTO {
 
     private String id;
-    @NotBlank
+    @NotBlank(message = "{not.blank.err}")
+    @Size(max = 35, message = "{short.string.max.length.err}")
     private String plant;
-    @NotBlank
+    @NotBlank(message = "{not.blank.err}")
     private String username;
-    @NotBlank
-    @Size(max = 30)
+    @NotBlank(message = "{not.blank.err}")
+    @Size(max = 35, message = "{short.string.max.length.err}")
     private String variety;
-    @NotBlank
+    @NotBlank(message = "{not.blank.err}")
     private String plantingDate;
     @NotBlank
     private String imageUrl;

@@ -1,5 +1,6 @@
 package bg.softuni.plantMe.service.impl;
 
+import bg.softuni.plantMe.models.DTOs.ShowUserDTO;
 import bg.softuni.plantMe.models.DTOs.UserRegisterDTO;
 import bg.softuni.plantMe.models.user.PlantMeUserDetails;
 import bg.softuni.plantMe.models.user.UserEntity;
@@ -42,11 +43,11 @@ public class UserServiceImpl implements UserService {
        return userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found!"));
     }
 
-    public PlantMeUserDetails getCurrentUser() {
+    public ShowUserDTO getCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getPrincipal())) {
-
-            return (PlantMeUserDetails) auth.getPrincipal();
+            UserEntity byUsername = this.findByUsername(auth.getName());
+            return modelMapper.map(byUsername, ShowUserDTO.class);
 
         }
         return null;

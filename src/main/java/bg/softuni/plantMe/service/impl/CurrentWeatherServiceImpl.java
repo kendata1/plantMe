@@ -1,5 +1,6 @@
 package bg.softuni.plantMe.service.impl;
 
+import bg.softuni.plantMe.config.CurrentWeatherApiConfig;
 import bg.softuni.plantMe.models.CurrentWeather;
 import bg.softuni.plantMe.models.DTOs.CurrentWeatherDTO;
 import bg.softuni.plantMe.repository.CurrentWeatherRepository;
@@ -24,18 +25,20 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
     private final Gson gson;
     private final ModelMapper modelMapper;
     private final CurrentWeatherRepository currentWeatherRepository;
+    private final CurrentWeatherApiConfig currentWeatherApiConfig;
 
-    public CurrentWeatherServiceImpl(@Qualifier("genericRestClient") RestClient restClient, Gson gson, ModelMapper modelMapper, CurrentWeatherRepository currentWeatherRepository) {
+    public CurrentWeatherServiceImpl(@Qualifier("genericRestClient") RestClient restClient, Gson gson, ModelMapper modelMapper, CurrentWeatherRepository currentWeatherRepository, CurrentWeatherApiConfig currentWeatherApiConfig) {
         this.restClient = restClient;
         this.gson = gson;
         this.modelMapper = modelMapper;
         this.currentWeatherRepository = currentWeatherRepository;
+        this.currentWeatherApiConfig = currentWeatherApiConfig;
     }
 
     @Override
     public CurrentWeatherDTO fetchCurrentWeather() {
         String requestBody = restClient.get()
-                .uri("https://api.open-meteo.com/v1/forecast?latitude=42.15&longitude=24.75&current=temperature_2m,is_day,rain,cloud_cover,wind_speed_10m")
+                .uri(currentWeatherApiConfig.getUrl())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(String.class);

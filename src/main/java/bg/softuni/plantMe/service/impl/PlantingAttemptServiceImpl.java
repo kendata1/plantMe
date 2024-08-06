@@ -1,5 +1,6 @@
 package bg.softuni.plantMe.service.impl;
 
+import bg.softuni.plantMe.config.AttemptsApiConfig;
 import bg.softuni.plantMe.models.DTOs.PlantShortInfoDTO;
 import bg.softuni.plantMe.models.DTOs.PlantingAttemptDTO;
 import bg.softuni.plantMe.models.DTOs.PlantingAttemptShortDTO;
@@ -24,11 +25,13 @@ public class PlantingAttemptServiceImpl implements PlantingAttemptService {
     private final RestClient attemptsRestClient;
     private final ModelMapper modelMapper;
     private final PlantService plantService;
+    private final AttemptsApiConfig attemptsApiConfig;
 
-    public PlantingAttemptServiceImpl(@Qualifier("attemptsRestClient") RestClient restClient, ModelMapper modelMapper, ModelMapper modelMapper1, PlantService plantService) {
+    public PlantingAttemptServiceImpl(@Qualifier("attemptsRestClient") RestClient restClient, ModelMapper modelMapper, ModelMapper modelMapper1, PlantService plantService, AttemptsApiConfig attemptsApiConfig) {
         this.attemptsRestClient = restClient;
         this.modelMapper = modelMapper1;
         this.plantService = plantService;
+        this.attemptsApiConfig = attemptsApiConfig;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class PlantingAttemptServiceImpl implements PlantingAttemptService {
 
         attemptsRestClient
                 .post()
-                .uri("http://localhost:8081/attempts/add")
+                .uri(attemptsApiConfig.getBaseUrl() + "/add")
                 .body(addPlantingAttemptDTO)
                 .retrieve();
     }
@@ -47,7 +50,7 @@ public class PlantingAttemptServiceImpl implements PlantingAttemptService {
         LOGGER.info("Get all Attempts by username");
         return attemptsRestClient
                 .get()
-                .uri("http://localhost:8081/attempts/all/{username}", username)
+                .uri(attemptsApiConfig.getBaseUrl() + "/all/{username}"  , username)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {});
@@ -58,7 +61,7 @@ public class PlantingAttemptServiceImpl implements PlantingAttemptService {
         LOGGER.info("Get all Attempts by username");
         return attemptsRestClient
                 .get()
-                .uri("http://localhost:8081/attempts/isnt/{username}", username)
+                .uri(attemptsApiConfig.getBaseUrl() + "/isnt/{username}", username)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {});
@@ -68,7 +71,7 @@ public class PlantingAttemptServiceImpl implements PlantingAttemptService {
     public void deleteAttempt(Long id) {
         attemptsRestClient
                 .delete()
-                .uri("http://localhost:8081/attempts/{id}", id)
+                .uri(attemptsApiConfig.getBaseUrl() + "/{id}", id)
                 .retrieve();
     }
 
@@ -76,7 +79,7 @@ public class PlantingAttemptServiceImpl implements PlantingAttemptService {
     public PlantingAttemptDTO getPlantingAttemptById(Long id) {
         return attemptsRestClient
                 .get()
-                .uri("http://localhost:8081/attempts/{id}", id)
+                .uri(attemptsApiConfig.getBaseUrl() + "/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(PlantingAttemptDTO.class);

@@ -1,6 +1,8 @@
 package bg.softuni.plantMe.web;
 
+import bg.softuni.plantMe.models.DTOs.ShowUserDTO;
 import bg.softuni.plantMe.models.DTOs.UserRegisterDTO;
+import bg.softuni.plantMe.models.user.PlantMeUserDetails;
 import bg.softuni.plantMe.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,11 @@ public class UserController {
     public UserRegisterDTO createUserRegisterDTO() {
         return new UserRegisterDTO();
     }
+
+    @ModelAttribute("user")
+    public ShowUserDTO getUser() {
+        return userService.getCurrentUser();
+    }
     @GetMapping("/login")
     public String viewLogin () {
         return "login";
@@ -36,6 +43,10 @@ public class UserController {
     }
     @GetMapping("/login-error")
     public String viewLoginError () { return "login-err"; }
+    @GetMapping("/profile")
+    public String viewProfile () {
+        return "profile";
+    }
     @PostMapping("/register")
     public String register (@Valid UserRegisterDTO data,
                             BindingResult bindingResult,
