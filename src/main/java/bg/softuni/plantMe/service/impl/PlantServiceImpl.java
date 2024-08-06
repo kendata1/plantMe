@@ -8,6 +8,7 @@ import bg.softuni.plantMe.models.PlantFamily;
 import bg.softuni.plantMe.repository.PlantFamilyRepository;
 import bg.softuni.plantMe.repository.PlantRepository;
 import bg.softuni.plantMe.service.PlantService;
+import bg.softuni.plantMe.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -62,7 +63,7 @@ public class PlantServiceImpl implements PlantService {
                     .map(plant -> modelMapper.map(plant, PlantShortInfoDTO.class))
                     .collect(Collectors.toList());
         }
-        throw new RuntimeException("Plant Family does not exists!");
+        throw new ObjectNotFoundException("Plant family with id not found!");
     }
 
     @Override
@@ -74,7 +75,7 @@ public class PlantServiceImpl implements PlantService {
             mapped.setPlantFamily(optionalPlant.get().getPlantFamily());
             return mapped;
         }
-        throw new RuntimeException("Optional plant with id " + id + " not found!");
+        throw new ObjectNotFoundException("Plant with id " + id + " not found!");
     }
 
     @Override
@@ -85,7 +86,7 @@ public class PlantServiceImpl implements PlantService {
     @Override
     public String getImageUrlByPlantName(String plantName) {
         return plantRepository.findByName(plantName)
-                .orElseThrow(() -> new RuntimeException("Plant not found!"))
+                .orElseThrow(() -> new ObjectNotFoundException("Plant " + plantName + "not found!"))
                 .getImageUrl();
     }
 

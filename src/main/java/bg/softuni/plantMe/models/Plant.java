@@ -27,20 +27,6 @@ public class Plant extends BaseEntity {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Override
-    public String toString() {
-        return "Plant{" +
-                "name='" + name + '\'' +
-                ", plantFamily=" + plantFamily +
-                ", sunRequirements=" + sunRequirements +
-                ", minSpacing=" + minSpacing +
-                ", maxSpacing=" + maxSpacing +
-                ", information='" + information + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", companionPlants=" + companionPlants +
-                '}';
-    }
-
     @ManyToMany
     @JoinTable(name = "plants_companions",
     joinColumns = @JoinColumn(name = "plant_id"),
@@ -50,6 +36,7 @@ public class Plant extends BaseEntity {
     public Plant () {
         this.companionPlants = new HashSet<>();
     }
+
 
     public String getName() {
         return name;

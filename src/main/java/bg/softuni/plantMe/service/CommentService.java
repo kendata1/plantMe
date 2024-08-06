@@ -1,14 +1,12 @@
 package bg.softuni.plantMe.service;
 
-import bg.softuni.plantMe.models.Comment;
-import bg.softuni.plantMe.models.DTOs.AddCommentDTO;
-import bg.softuni.plantMe.models.DTOs.ShowCommentDTO;
+import bg.softuni.plantMe.models.DTOs.CommentDTO;
 
 import java.util.List;
 
 public interface CommentService {
-    List<ShowCommentDTO> getAllCommentsForAttempt (Long attemptId);
-    void saveComment (AddCommentDTO addCommentDTO);
+    List<CommentDTO> getAllCommentsForAttempt (Long attemptId);
+    void saveComment (CommentDTO addCommentDTO);
     void deleteComment (Long id);
-    Comment getCommentById (Long id);
+    CommentDTO getCommentById (Long id);
 }

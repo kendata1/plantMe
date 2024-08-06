@@ -104,9 +104,7 @@ public class PlantingAttemptServiceImpl implements PlantingAttemptService {
     @Override
     public PlantingAttemptShortDTO mapToShortInfo (PlantingAttemptDTO plantingAttemptDTO) {
         PlantingAttemptShortDTO mapped = modelMapper.map(plantingAttemptDTO, PlantingAttemptShortDTO.class);
-
         mapped.setImageUrl(plantService.getImageUrlByPlantName(plantingAttemptDTO.getPlant()));
-
         return mapped;
     }
 }

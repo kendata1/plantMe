@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-public class AddCommentDTO {
+public class CommentDTO {
         private Long id;
         @PastOrPresent
         private LocalDateTime datePublished;
@@ -16,7 +16,7 @@ public class AddCommentDTO {
         @Positive
         private Long attemptId;
 
-        public AddCommentDTO() {}
+        public CommentDTO() {}
 
         public Long getId() {
                 return id;

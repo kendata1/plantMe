@@ -72,15 +72,4 @@ public class CurrentWeather extends BaseEntity {
         this.windSpeed = windSpeed;
     }
 
-    @Override
-    public String toString() {
-        return "CurrentWeather{" +
-                "time=" + time +
-                ", temperature=" + temperature +
-                ", isDay=" + isDay +
-                ", cloudCover=" + cloudCover +
-                ", rain=" + rain +
-                ", windSpeed=" + windSpeed +
-                '}';
-    }
 }

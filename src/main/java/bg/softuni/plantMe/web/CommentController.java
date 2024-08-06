@@ -1,6 +1,6 @@
 package bg.softuni.plantMe.web;
 
-import bg.softuni.plantMe.models.DTOs.AddCommentDTO;
+import bg.softuni.plantMe.models.DTOs.CommentDTO;
 import bg.softuni.plantMe.service.CommentService;
 import bg.softuni.plantMe.service.UserService;
 import jakarta.validation.Valid;
@@ -25,7 +25,7 @@ public class CommentController {
     }
 
     @PostMapping("attempts/{id}/add-comment")
-    public String addComment (@PathVariable("id") Long id, @Valid AddCommentDTO addCommentDTO,
+    public String addComment (@PathVariable("id") Long id, @Valid CommentDTO addCommentDTO,
                               BindingResult bindingResult,
                               RedirectAttributes redirectAttributes,
                               @AuthenticationPrincipal UserDetails userDetails) {

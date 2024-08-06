@@ -1,10 +1,7 @@
 package bg.softuni.plantMe.service.impl;
 
 import bg.softuni.plantMe.config.AttemptsApiConfig;
-import bg.softuni.plantMe.config.CurrentWeatherApiConfig;
-import bg.softuni.plantMe.models.DTOs.CurrentWeatherDTO;
 import bg.softuni.plantMe.models.DTOs.PlantingAttemptDTO;
-import bg.softuni.plantMe.service.CurrentWeatherService;
 import bg.softuni.plantMe.service.PlantingAttemptService;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.maciejwalkowiak.wiremock.spring.ConfigureWireMock;

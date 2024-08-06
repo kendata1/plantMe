@@ -29,11 +29,15 @@ public class CurrentWeatherServiceImplIT {
     private CurrentWeatherService currentWeatherService;
 
     @Autowired
-    CurrentWeatherApiConfig currentWeatherApiConfig;
+    private CurrentWeatherApiConfig currentWeatherApiConfig;
+
+
 
     @BeforeEach
     void setUp() {
         currentWeatherApiConfig.setUrl(wireMockServer.baseUrl() + "/test-currencies");
+
+
     }
 
     @Test
@@ -59,7 +63,7 @@ public class CurrentWeatherServiceImplIT {
         Assertions.assertEquals(16.0, currentWeatherDTO.getWindSpeed());
         Assertions.assertEquals(900, currentWeatherDTO.getInterval());
         Assertions.assertNull(currentWeatherDTO.getImageUrl());
-
     }
+
 
 }

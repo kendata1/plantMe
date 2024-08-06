@@ -1,6 +1,7 @@
 package bg.softuni.plantMe.service.impl;
 
 import bg.softuni.plantMe.models.DTOs.AddPlantDTO;
+import bg.softuni.plantMe.models.DTOs.PlantFullInfoDTO;
 import bg.softuni.plantMe.models.DTOs.UserRegisterDTO;
 import bg.softuni.plantMe.models.Plant;
 import bg.softuni.plantMe.models.PlantFamily;
@@ -10,6 +11,7 @@ import bg.softuni.plantMe.models.user.UserEntity;
 import bg.softuni.plantMe.models.user.UserRole;
 import bg.softuni.plantMe.repository.PlantFamilyRepository;
 import bg.softuni.plantMe.repository.PlantRepository;
+import bg.softuni.plantMe.service.exception.ObjectNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +31,7 @@ import static org.mockito.Mockito.when;
 public class PlantServiceTests {
 
     private PlantServiceImpl toTest;
+    private Plant testPlant;
     @Mock
     PlantFamilyRepository mockPlantFamilyRepository;
     @Mock
@@ -43,6 +46,15 @@ public class PlantServiceTests {
                 mockPlantRepository,
                 new ModelMapper()
         );
+
+        testPlant = new Plant();
+        testPlant.setId(1L);
+        testPlant.setName("Test");
+        testPlant.setInformation("Lorem ipsum odor amet, consectetuer adipiscing elit. Feugiat vehicula aliquam duis; neque ad dapibus velit.");
+        testPlant.setImageUrl("imageUrl");
+        testPlant.setMaxSpacing(15);
+        testPlant.setMinSpacing(13);
+        testPlant.setSunRequirements(SunRequirements.FULL_SUN);
     }
 
     @Test
@@ -76,4 +88,41 @@ public class PlantServiceTests {
 
     }
 
+    @Test
+    void testShowPlantDetails_Exists () {
+
+        when(mockPlantRepository.findById(testPlant.getId())).thenReturn(Optional.of(testPlant));
+
+        PlantFullInfoDTO plantFullInfoDTO = toTest.showPlantDetails(1L);
+
+        Assertions.assertEquals(testPlant.getId(), plantFullInfoDTO.getId());
+        Assertions.assertEquals(testPlant.getName(), plantFullInfoDTO.getName());
+        Assertions.assertEquals(testPlant.getInformation(), plantFullInfoDTO.getInformation());
+        Assertions.assertEquals(testPlant.getImageUrl(), plantFullInfoDTO.getImageUrl());
+        Assertions.assertEquals(testPlant.getMaxSpacing(), plantFullInfoDTO.getMaxSpacing());
+        Assertions.assertEquals(testPlant.getMinSpacing(), plantFullInfoDTO.getMinSpacing());
+        Assertions.assertEquals(testPlant.getSunRequirements(), plantFullInfoDTO.getSunRequirements());
+
+    }
+
+    @Test
+    void testShowPlantDetails_NotExist () {
+        Assertions.assertThrows(ObjectNotFoundException.class,
+                () -> toTest.showPlantDetails(1L));
+    }
+
+    @Test
+    void testGetImageUrlByPlantName_Exists () {
+        when(mockPlantRepository.findByName(testPlant.getName())).thenReturn(Optional.of(testPlant));
+
+        String imageUrlByPlantName = toTest.getImageUrlByPlantName(testPlant.getName());
+
+        Assertions.assertEquals(imageUrlByPlantName, testPlant.getImageUrl());
+    }
+
+    @Test
+    void testGetImageUrlByPlantName_NotExist () {
+        Assertions.assertThrows(ObjectNotFoundException.class,
+                () -> toTest.getImageUrlByPlantName(testPlant.getName()));
+    }
 }

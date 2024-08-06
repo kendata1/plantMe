@@ -67,14 +67,4 @@ public class PlantFamily extends BaseEntity {
         this.plants = plants;
     }
 
-    @Override
-    public String toString() {
-        return "PlantFamily{" +
-                "name='" + name + '\'' +
-                ", alias='" + alias + '\'' +
-                ", description='" + information + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", plants=" + plants +
-                '}';
-    }
 }

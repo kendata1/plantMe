@@ -5,6 +5,7 @@ import bg.softuni.plantMe.models.Plant;
 import bg.softuni.plantMe.models.PlantFamily;
 import bg.softuni.plantMe.repository.PlantFamilyRepository;
 import bg.softuni.plantMe.service.PlantFamilyService;
+import bg.softuni.plantMe.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class PlantFamilyServiceImpl implements PlantFamilyService {
     public PlantFamilyDTO getPlantFamilyById(Long id) {
         return plantFamilyRepository.findById(id)
                 .map(plantFamily -> modelMapper.map(plantFamily,PlantFamilyDTO.class))
-                .orElseThrow();
+                .orElseThrow(() -> new ObjectNotFoundException("Plant family not found!"));
     }
 
     @Override

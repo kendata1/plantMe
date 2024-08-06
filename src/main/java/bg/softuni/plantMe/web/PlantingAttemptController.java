@@ -1,20 +1,15 @@
 package bg.softuni.plantMe.web;
 
-import bg.softuni.plantMe.models.DTOs.AddCommentDTO;
+import bg.softuni.plantMe.models.DTOs.CommentDTO;
 import bg.softuni.plantMe.models.DTOs.PlantingAttemptDTO;
 import bg.softuni.plantMe.models.DTOs.ShowUserDTO;
-import bg.softuni.plantMe.models.user.PlantMeUserDetails;
-import bg.softuni.plantMe.models.user.UserEntity;
 import bg.softuni.plantMe.service.CommentService;
 import bg.softuni.plantMe.service.PlantService;
 import bg.softuni.plantMe.service.PlantingAttemptService;
 import bg.softuni.plantMe.service.UserService;
 import jakarta.validation.Valid;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,8 +50,8 @@ public class PlantingAttemptController {
     }
 
     @ModelAttribute("addCommentDTO")
-    public AddCommentDTO addCommentDTO() {
-        return new AddCommentDTO();
+    public CommentDTO addCommentDTO() {
+        return new CommentDTO();
     }
 
     @GetMapping("/add")

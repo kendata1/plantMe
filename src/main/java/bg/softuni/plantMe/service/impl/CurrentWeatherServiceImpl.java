@@ -5,6 +5,7 @@ import bg.softuni.plantMe.models.CurrentWeather;
 import bg.softuni.plantMe.models.DTOs.CurrentWeatherDTO;
 import bg.softuni.plantMe.repository.CurrentWeatherRepository;
 import bg.softuni.plantMe.service.CurrentWeatherService;
+import bg.softuni.plantMe.service.exception.ObjectNotFoundException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -88,7 +89,7 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
 
     @Override
     public CurrentWeatherDTO getCurrentWeather() {
-        CurrentWeather currentWeather = currentWeatherRepository.findAll().get(0);
+        CurrentWeather currentWeather = currentWeatherRepository.findById(1L).orElseThrow(() -> new ObjectNotFoundException("Current weather not found!"));
 
         CurrentWeatherDTO mapped = modelMapper.map(currentWeather, CurrentWeatherDTO.class);
 
@@ -98,7 +99,7 @@ public class CurrentWeatherServiceImpl implements CurrentWeatherService {
         return mapped;
     }
 
-    private String choseWeatherImage(CurrentWeatherDTO currentWeatherDTO) {
+    public String choseWeatherImage(CurrentWeatherDTO currentWeatherDTO) {
         if (currentWeatherDTO.getIsDay() == 1) {
             if (currentWeatherDTO.getRain() > 0.6) {
                 return "/images/weather/day_rain.png";
