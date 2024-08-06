@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+
+<body>
+<header th:replace="fragments/commons::nav"></header>
+<main class="p-4">
+    <div class="welcome">
+        <h1 th:text="#{no_authorities_for_this_page}">No authority for this page.</h1>
+        <hr class="my-3 bg-white w-50"/>
+
+        <p class="h4" th:text="#{return_to_home_page}"></p>
+
+    </div>
+</main>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+<footer th:replace="fragments/commons::footer"></footer>
+</html>
+
