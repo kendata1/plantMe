@@ -12,9 +12,9 @@
     <div class="d-flex flex-wrap">
 
         <a th:href="@{/attempts/{id}(id=${plantingAttempt.id})}" th:each="plantingAttempt : ${plantAttemptsOfOtherUsers}"
-           class="plant-container text-center mt-5 mb-5 " style="max-width: 480px; max-height: 220px">
+           class="plant-container text-center mt-3 justify-content-start" style="max-width: 480px; max-height: 220px">
             <div class="col-5 p-0" style="max-height: 200px; overflow: hidden">
-                <img style="border-radius: 6px; object-fit: cover"
+                <img style="border-radius: 6px; object-fit: cover; height: 100%"
                      th:src="${plantingAttempt.getImageUrl()}"
                      alt="Plant image"
                      class="img-fluid"

@@ -16,7 +16,7 @@
         </div>
 
         <div class="col-6">
-            <p th:text="${plantFamilyDetails.description}"></p>
+            <p th:text="${plantFamilyDetails.information}"></p>
 
             <form th:action="@{/plant-family/{id}(id = ${plantFamilyDetails.id})}"
                   th:method="DELETE"

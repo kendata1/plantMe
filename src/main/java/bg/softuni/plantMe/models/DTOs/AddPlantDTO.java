@@ -10,7 +10,6 @@ public class AddPlantDTO {
     @Size(max = 35, message = "{short.string.max.length.err}")
     private String plantFamily;
     @NotNull(message = "{not.blank.err}")
-    @Size(max = 35, message = "{short.string.max.length.err}")
     private SunRequirements sunRequirements;
     @Positive(message = "{positive.number.err}")
     @Max(value = 1000, message = "{spacing.max.value.err}")
